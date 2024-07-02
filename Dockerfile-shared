@@ -1,0 +1,11 @@
+FROM openjdk:17
+
+WORKDIR /app
+
+EXPOSE 8080
+
+COPY /shared/target/shared-0.0.1-SNAPSHOT.jar shared-0.0.1-SNAPSHOT.jar
+
+
+
+ CMD ["java", "-jar", "shared-0.0.1-SNAPSHOT.jar"]
