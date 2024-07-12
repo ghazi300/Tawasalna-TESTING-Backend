@@ -133,7 +133,7 @@
         <module>tawasalna-social</module>
         <module>tawasalna-business</module>
         <module>tawasalna-pms</module>
-        <module>tawasalna-crm</module>
+        <module>tawasalna-MaintenanceAgent</module>
     </modules>
 
     <build>
