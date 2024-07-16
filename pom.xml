@@ -135,6 +135,7 @@
         <module>tawasalna-pms</module>
         <module>tawasalna-crm</module>
         <module>tawasalna-facilities-management</module>
+
     </modules>
 
     <build>
