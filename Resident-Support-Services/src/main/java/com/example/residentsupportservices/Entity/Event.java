@@ -1,33 +1,34 @@
-package com.example.residentsupportservices.Entity;
-import jakarta.persistence.*;
+package com.example.residentsupportservices.entity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
 
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-
-@Entity
+@Document(collection = "eventt")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String title;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date start;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+
     private Date end;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "event_id")
+    @DBRef
     private List<Participant> participants;
 
     private String location;
@@ -36,6 +37,4 @@ public class Event {
     private String imageUrl;
     private Integer maxParticipants;
     private String notes;
-
-
 }

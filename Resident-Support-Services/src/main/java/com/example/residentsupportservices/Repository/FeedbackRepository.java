@@ -1,7 +1,7 @@
-package com.example.residentsupportservices.Repository;
+package com.example.residentsupportservices.repository;
 
-import com.example.residentsupportservices.Entity.Feedback;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.residentsupportservices.entity.Feedback;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
+public interface FeedbackRepository extends MongoRepository<Feedback, String> {
 }

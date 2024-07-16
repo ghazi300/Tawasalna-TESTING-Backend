@@ -17,6 +17,10 @@
         <module name="tawasalna-crm" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="tawasalna-auth (1)" target="17" />
+      <module name="tawasalna-auth (2)" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -24,6 +28,8 @@
       <module name="shared" options="-parameters" />
       <module name="tawasalna-administration" options="-parameters" />
       <module name="tawasalna-auth" options="-parameters" />
+      <module name="tawasalna-auth (1)" options="-parameters" />
+      <module name="tawasalna-auth (2)" options="-parameters" />
       <module name="tawasalna-business" options="-parameters" />
       <module name="tawasalna-crm" options="-parameters" />
       <module name="tawasalna-pms" options="-parameters" />

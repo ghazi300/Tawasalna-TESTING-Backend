@@ -1,7 +1,6 @@
-package com.example.residentsupportservices.Services;
+package com.example.residentsupportservices.services;
 
-
-import com.example.residentsupportservices.Entity.Event;
+import com.example.residentsupportservices.entity.Event;
 
 import java.util.List;
 
@@ -9,12 +8,11 @@ public interface IEventService {
 
     List<Event> getAllEvents();
 
-    Event getEventById(Long id);
+    Event getEventById(String id);
 
     Event createEvent(Event event);
 
-    Event updateEvent(Long id, Event event);
+    Event updateEvent(String id, Event event);
 
-    void deleteEvent(Long id);
+    void deleteEvent(String id);
 }
-

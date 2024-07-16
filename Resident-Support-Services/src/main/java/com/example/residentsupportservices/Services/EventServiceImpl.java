@@ -1,7 +1,8 @@
-package com.example.residentsupportservices.Services;
+package com.example.residentsupportservices.services;
 
-import com.example.residentsupportservices.Entity.Event;
-import com.example.residentsupportservices.Repository.EventRepository;
+import com.example.residentsupportservices.entity.Event;
+import com.example.residentsupportservices.repository.EventRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,14 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class EventServiceImpl implements IEventService {
 
-    private final EventRepository eventRepository;
+    private EventRepository eventRepository;
 
-    @Autowired
-    public EventServiceImpl(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
-    }
 
     @Override
     public List<Event> getAllEvents() {
@@ -24,7 +22,7 @@ public class EventServiceImpl implements IEventService {
     }
 
     @Override
-    public Event getEventById(Long id) {
+    public Event getEventById(String id) {
         Optional<Event> event = eventRepository.findById(id);
         return event.orElse(null); // Handle optional if necessary
     }
@@ -35,7 +33,7 @@ public class EventServiceImpl implements IEventService {
     }
 
     @Override
-    public Event updateEvent(Long id, Event event) {
+    public Event updateEvent(String id, Event event) {
         if (!eventRepository.existsById(id)) {
             // Handle not found scenario or throw exception
             return null;
@@ -45,7 +43,7 @@ public class EventServiceImpl implements IEventService {
     }
 
     @Override
-    public void deleteEvent(Long id) {
+    public void deleteEvent(String id) {
         eventRepository.deleteById(id);
     }
 }

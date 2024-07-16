@@ -1,26 +1,22 @@
-package com.example.residentsupportservices.Entity;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+package com.example.residentsupportservices.entity;
 
-@Entity
-@Getter
-@Setter
-@AllArgsConstructor
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
+@Document(collection = "attendance")
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Attendance {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
-    private Event event;
+
 
     private String participantName;
     private Boolean attended;
-
-
 }

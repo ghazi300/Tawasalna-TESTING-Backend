@@ -1,7 +1,7 @@
-package com.example.residentsupportservices.Repository;
+package com.example.residentsupportservices.repository;
 
-import com.example.residentsupportservices.Entity.Event;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.residentsupportservices.entity.Event;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface EventRepository extends JpaRepository<Event, Long> {
+public interface EventRepository extends MongoRepository<Event, String> {
 }

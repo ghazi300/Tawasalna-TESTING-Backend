@@ -134,6 +134,7 @@
         <module>tawasalna-business</module>
         <module>tawasalna-pms</module>
         <module>tawasalna-crm</module>
+        <module>Resident-Support-Services</module>
     </modules>
 
     <build>

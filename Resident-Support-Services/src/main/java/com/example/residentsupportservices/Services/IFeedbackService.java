@@ -1,14 +1,13 @@
-package com.example.residentsupportservices.Services;
+package com.example.residentsupportservices.services;
 
-
-import com.example.residentsupportservices.Entity.Feedback;
+import com.example.residentsupportservices.entity.Feedback;
 
 import java.util.List;
 
 public interface IFeedbackService {
     List<Feedback> getAllFeedbacks();
-    Feedback getFeedbackById(Long id);
+    Feedback getFeedbackById(String id);
     Feedback createFeedback(Feedback feedback);
-    Feedback updateFeedback(Long id, Feedback feedback);
-    void deleteFeedback(Long id);
+    Feedback updateFeedback(String id, Feedback feedback);
+    void deleteFeedback(String id);
 }

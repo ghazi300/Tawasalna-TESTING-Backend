@@ -1,7 +1,7 @@
-package com.example.residentsupportservices.Services;
+package com.example.residentsupportservices.services;
 
-import com.example.residentsupportservices.Entity.Participant;
-import com.example.residentsupportservices.Repository.ParticipantRepository;
+import com.example.residentsupportservices.entity.Participant;
+import com.example.residentsupportservices.repository.ParticipantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class ParticipantService implements IParticipantService {
     }
 
     @Override
-    public Participant getParticipantById(Long id) {
+    public Participant getParticipantById(String id) {
         Optional<Participant> participant = participantRepository.findById(id);
         return participant.orElse(null); // Handle optional if necessary
     }
@@ -35,7 +35,7 @@ public class ParticipantService implements IParticipantService {
     }
 
     @Override
-    public Participant updateParticipant(Long id, Participant participant) {
+    public Participant updateParticipant(String id, Participant participant) {
         if (!participantRepository.existsById(id)) {
             // Handle not found scenario or throw exception
             return null;
@@ -45,7 +45,7 @@ public class ParticipantService implements IParticipantService {
     }
 
     @Override
-    public void deleteParticipant(Long id) {
+    public void deleteParticipant(String id) {
         participantRepository.deleteById(id);
     }
 }

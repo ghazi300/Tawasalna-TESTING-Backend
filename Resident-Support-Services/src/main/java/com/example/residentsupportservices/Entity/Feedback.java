@@ -1,27 +1,26 @@
-package com.example.residentsupportservices.Entity;
-import jakarta.persistence.*;
+package com.example.residentsupportservices.entity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
-
-@Entity
+@Document(collection = "feedback")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Feedback {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "participant_id")
+    @DBRef
     private Participant participant;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id")
+    @DBRef
     private Event event;
 
     private String comment;

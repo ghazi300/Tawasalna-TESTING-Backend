@@ -1,7 +1,7 @@
-package com.example.residentsupportservices.Services;
+package com.example.residentsupportservices.services;
 
-import com.example.residentsupportservices.Entity.Feedback;
-import com.example.residentsupportservices.Repository.FeedbackRepository;
+import com.example.residentsupportservices.entity.Feedback;
+import com.example.residentsupportservices.repository.FeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class FeedbackService implements IFeedbackService {
     }
 
     @Override
-    public Feedback getFeedbackById(Long id) {
+    public Feedback getFeedbackById(String id) {
         Optional<Feedback> feedback = feedbackRepository.findById(id);
         return feedback.orElse(null); // Handle optional if necessary
     }
@@ -35,7 +35,7 @@ public class FeedbackService implements IFeedbackService {
     }
 
     @Override
-    public Feedback updateFeedback(Long id, Feedback feedback) {
+    public Feedback updateFeedback(String id, Feedback feedback) {
         if (!feedbackRepository.existsById(id)) {
             // Handle not found scenario or throw exception
             return null;
@@ -45,7 +45,7 @@ public class FeedbackService implements IFeedbackService {
     }
 
     @Override
-    public void deleteFeedback(Long id) {
+    public void deleteFeedback(String id) {
         feedbackRepository.deleteById(id);
     }
 }

@@ -1,7 +1,7 @@
-package com.example.residentsupportservices.Services;
+package com.example.residentsupportservices.services;
 
-import com.example.residentsupportservices.Entity.Attendance;
-import com.example.residentsupportservices.Repository.AttendanceRepository;
+import com.example.residentsupportservices.entity.Attendance;
+import com.example.residentsupportservices.repository.AttendanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class AttendanceService implements IAttendanceService {
     }
 
     @Override
-    public Attendance getAttendanceById(Long id) {
+    public Attendance getAttendanceById(String id) {
         Optional<Attendance> attendance = attendanceRepository.findById(id);
         return attendance.orElse(null); // Handle optional if necessary
     }
@@ -35,7 +35,7 @@ public class AttendanceService implements IAttendanceService {
     }
 
     @Override
-    public Attendance updateAttendance(Long id, Attendance attendance) {
+    public Attendance updateAttendance(String id, Attendance attendance) {
         if (!attendanceRepository.existsById(id)) {
             // Handle not found scenario or throw exception
             return null;
@@ -45,7 +45,7 @@ public class AttendanceService implements IAttendanceService {
     }
 
     @Override
-    public void deleteAttendance(Long id) {
+    public void deleteAttendance(String id) {
         attendanceRepository.deleteById(id);
     }
 }

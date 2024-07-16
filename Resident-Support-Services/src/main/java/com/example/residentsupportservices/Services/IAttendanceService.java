@@ -1,14 +1,13 @@
-package com.example.residentsupportservices.Services;
+package com.example.residentsupportservices.services;
 
-
-import com.example.residentsupportservices.Entity.Attendance;
+import com.example.residentsupportservices.entity.Attendance;
 
 import java.util.List;
 
 public interface IAttendanceService {
     List<Attendance> getAllAttendances();
-    Attendance getAttendanceById(Long id);
+    Attendance getAttendanceById(String id);
     Attendance createAttendance(Attendance attendance);
-    Attendance updateAttendance(Long id, Attendance attendance);
-    void deleteAttendance(Long id);
+    Attendance updateAttendance(String id, Attendance attendance);
+    void deleteAttendance(String id);
 }
