@@ -24,8 +24,8 @@ public class Event {
     private String title;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date start;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date end;
 
     @DBRef

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ParticipantService implements IParticipantService {
@@ -47,5 +48,12 @@ public class ParticipantService implements IParticipantService {
     @Override
     public void deleteParticipant(String id) {
         participantRepository.deleteById(id);
+    }
+    @Override
+    public List<String> getAllParticipantNames() {
+        return participantRepository.findAll()
+                .stream()
+                .map(Participant::getName) // Extracting just the name
+                .collect(Collectors.toList());
     }
 }

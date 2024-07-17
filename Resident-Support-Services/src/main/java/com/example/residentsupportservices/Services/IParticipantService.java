@@ -10,4 +10,6 @@ public interface IParticipantService {
     Participant createParticipant(Participant participant);
     Participant updateParticipant(String id, Participant participant);
     void deleteParticipant(String id);
+    List<String> getAllParticipantNames();
+
 }
