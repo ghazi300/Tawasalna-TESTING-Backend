@@ -1,0 +1,11 @@
+FROM openjdk:17
+
+WORKDIR /app
+
+EXPOSE 8080
+
+COPY /tawasalna-auth/target/tawasalna-auth-0.0.1-SNAPSHOT.jar tawasalna-auth-0.0.1-SNAPSHOT.jar
+COPY /shared/target/shared-0.0.2-SNAPSHOT.jar shared-0.0.2-SNAPSHOT.jar
+
+
+ CMD ["java", "-jar", "tawasalna-auth-0.0.1-SNAPSHOT.jar"]

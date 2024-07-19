@@ -1,0 +1,332 @@
+- name: Deploy application on Kubernetes
+  hosts: all
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: Create backend administration deployment
+      k8s:
+        kubeconfig: "~/.kube/config"
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: administration-deployment
+            namespace: tawasalna
+            labels:
+              app: my-app-administration
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: my-app-administration
+            template:
+              metadata:
+                labels:
+                  app: my-app-administration
+              spec:
+                containers:
+                  - name: administration-container
+                    image: brahim98/tawasolna_back:administrationspringimage
+                    imagePullPolicy: Always
+                    ports:
+                      - containerPort: 8074
+                nodeSelector:
+                  kubernetes.io/hostname: worker2
+
+    - name: Create backend administration service
+      k8s:
+        state: present
+        kubeconfig: "~/.kube/config"
+        verify_ssl: no
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: administration-service
+            namespace: tawasalna
+            labels:
+              app: my-app-administration
+          spec:
+            selector:
+              app: my-app-administration
+            ports:
+              - protocol: TCP
+                port: 8074
+                targetPort: 8074
+                nodePort: 30361
+            type: NodePort
+
+    - name: Create backend authentication deployment
+      k8s:
+        kubeconfig: "~/.kube/config"
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: authentication-deployment
+            namespace: tawasalna
+            labels:
+              app: my-app-authentication
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: my-app-authentication
+            template:
+              metadata:
+                labels:
+                  app: my-app-authentication
+              spec:
+                containers:
+                  - name: authentication-container
+                    image: brahim98/tawasolna_back:authenticationspringimage
+                    imagePullPolicy: Always
+                    ports:
+                      - containerPort: 8070
+                nodeSelector:
+                  kubernetes.io/hostname: worker2
+
+    - name: Create backend authentication service
+      k8s:
+        state: present
+        kubeconfig: "~/.kube/config"
+        verify_ssl: no
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: authentication-service
+            namespace: tawasalna
+            labels:
+              app: my-app-authentication
+          spec:
+            selector:
+              app: my-app-authentication
+            ports:
+              - protocol: TCP
+                port: 8070
+                targetPort: 8070
+                nodePort: 30265
+            type: NodePort
+
+    - name: Create backend pms deployment
+      k8s:
+        kubeconfig: "~/.kube/config"
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: pms-deployment
+            namespace: tawasalna
+            labels:
+              app: my-app-pms
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: my-app-pms
+            template:
+              metadata:
+                labels:
+                  app: my-app-pms
+              spec:
+                containers:
+                  - name: pms-container
+                    image: brahim98/tawasolna_back:pmsspringimage
+                    imagePullPolicy: Always
+                    ports:
+                      - containerPort: 8094
+                nodeSelector:
+                  kubernetes.io/hostname: worker2
+
+    - name: Create backend pms service
+      k8s:
+        state: present
+        kubeconfig: "~/.kube/config"
+        verify_ssl: no
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: pms-service
+            namespace: tawasalna
+            labels:
+              app: my-app-pms
+          spec:
+            selector:
+              app: my-app-pms
+            ports:
+              - protocol: TCP
+                port: 8094
+                targetPort: 8094
+                nodePort: 32050
+
+            type: NodePort
+
+    - name: Create backend crm deployment
+      k8s:
+        kubeconfig: "~/.kube/config"
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: crm-deployment
+            namespace: tawasalna
+            labels:
+              app: my-app-crm
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: my-app-crm
+            template:
+              metadata:
+                labels:
+                  app: my-app-crm
+              spec:
+                containers:
+                  - name: crm-container
+                    image: brahim98/tawasolna_back:crmspringimage
+                    imagePullPolicy: Always
+                    ports:
+                      - containerPort: 8073
+                nodeSelector:
+                  kubernetes.io/hostname: worker2
+
+    - name: Create backend crm service
+      k8s:
+        state: present
+        kubeconfig: "~/.kube/config"
+        verify_ssl: no
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: crm-service
+            namespace: tawasalna
+            labels:
+              app: my-app-crm
+          spec:
+            selector:
+              app: my-app-crm
+            ports:
+              - protocol: TCP
+                port: 8073
+                targetPort: 8073
+                nodePort: 30103
+            type: NodePort
+
+    - name: Create backend social deployment
+      k8s:
+        kubeconfig: "~/.kube/config"
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: social-deployment
+            namespace: tawasalna
+            labels:
+              app: my-app-social
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: my-app-social
+            template:
+              metadata:
+                labels:
+                  app: my-app-social
+              spec:
+                containers:
+                  - name: social-container
+                    image: brahim98/tawasolna_back:socialspringimage
+                    imagePullPolicy: Always
+                    ports:
+                      - containerPort: 8093
+                nodeSelector:
+                  kubernetes.io/hostname: worker2
+
+    - name: Create backend social service
+      k8s:
+        state: present
+        kubeconfig: "~/.kube/config"
+        verify_ssl: no
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: social-service
+            namespace: tawasalna
+            labels:
+              app: my-app-social
+          spec:
+            selector:
+              app: my-app-social
+            ports:
+              - protocol: TCP
+                port: 8093
+                targetPort: 8093
+                nodePort: 31499
+
+            type: NodePort
+
+    - name: Create backend business deployment
+      k8s:
+        kubeconfig: "~/.kube/config"
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: business-deployment
+            namespace: tawasalna
+            labels:
+              app: my-app-business
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: my-app-business
+            template:
+              metadata:
+                labels:
+                  app: my-app-business
+              spec:
+                containers:
+                  - name: business-container
+                    image: brahim98/tawasolna_back:businessspringimage
+                    imagePullPolicy: Always
+                    ports:
+                      - containerPort: 8071
+                nodeSelector:
+                  kubernetes.io/hostname: worker2
+
+    - name: Create backend business service
+      k8s:
+        state: present
+        kubeconfig: "~/.kube/config"
+        verify_ssl: no
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: business-service
+            namespace: tawasalna
+            labels:
+              app: my-app-business
+          spec:
+            selector:
+              app: my-app-business
+            ports:
+              - protocol: TCP
+                port: 8071
+                targetPort: 8071
+                nodePort: 31195
+
+            type: NodePort
+
