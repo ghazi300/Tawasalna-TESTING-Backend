@@ -79,6 +79,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+
             <optional>true</optional>
         </dependency>
 
@@ -134,7 +135,14 @@
         <module>tawasalna-business</module>
         <module>tawasalna-pms</module>
         <module>tawasalna-crm</module>
+        <module>tawasalna-community-engagement</module>
+
+        <module>tawasalna-facilities-management</module>
+
         <module>tawasalna-crisis</module>
+        <module>tawasalna-security-safety</module>
+
+
     </modules>
 
     <build>
