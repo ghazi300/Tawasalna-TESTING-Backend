@@ -1,2 +1,4 @@
-package com.tawasalna.facilitiesmanagement.service;public interface IParkingViolation {
+package com.tawasalna.facilitiesmanagement.service;
+
+public interface IParkingViolation {
 }
