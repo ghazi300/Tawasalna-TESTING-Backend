@@ -6,6 +6,7 @@ import com.tawasalna.tawasalnacrisis.payload.IncidentPayload;
 import com.tawasalna.tawasalnacrisis.payload.RecentIncidentDto;
 import com.tawasalna.tawasalnacrisis.payload.ResourceAllocationRequest;
 import com.tawasalna.tawasalnacrisis.services.IncidentService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class IncidentController {
 
     @PostMapping
     public ResponseEntity<Incident> createIncident(
-            @RequestBody IncidentPayload incidentPayload
+          @Valid @RequestBody IncidentPayload incidentPayload
           ) {
 
         Optional<Incident> createdIncident = incidentService.createIncident(incidentPayload);
@@ -46,7 +47,7 @@ public class IncidentController {
         List<RecentIncidentDto> recentIncidents = incidentService.getRecentIncidents();
         return ResponseEntity.ok(recentIncidents);
     }
-    @PostMapping("/allocate")
+    @PutMapping("/allocate")
     public ResponseEntity<Incident> allocateResources(@RequestBody ResourceAllocationRequest request) {
         Incident updatedIncident = incidentService.allocateResources(request.getIncidentId(), request.getResourceIds());
         if (updatedIncident != null) {
