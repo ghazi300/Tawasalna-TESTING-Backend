@@ -2,83 +2,18 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-<<<<<<< HEAD
       <profile default="true" name="Default" enabled="true" />
-=======
->>>>>>> 46f69d836760724a820c5367227af2f6eaaa535b
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="shared" />
-<<<<<<< HEAD
-=======
-        <module name="tawasalna-crisis" />
-        <module name="tawasalna-security-safety" />
->>>>>>> 46f69d836760724a820c5367227af2f6eaaa535b
-        <module name="tawasalna-social" />
-        <module name="tawasalna-business" />
-        <module name="tawasalna-pms" />
-        <module name="tawasalna-administration" />
-<<<<<<< HEAD
-        <module name="tawasalna-auth" />
-        <module name="Resident-Support-Services" />
-        <module name="tawasalna-crm" />
-      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="tawasalna-auth (1)" target="17" />
-      <module name="tawasalna-auth (2)" target="17" />
-=======
-        <module name="Management-Coordination" />
-        <module name="tawasalna-auth" />
-        <module name="tawasalna-facilities-management" />
-        <module name="tawasalna-crm" />
-      </profile>
-      <profile name="Gradle Imported" enabled="true">
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.32/17d46b3e205515e1e8efd3ee4d57ce8018914163/lombok-1.18.32.jar" />
-        </processorPath>
-        <module name="ManagementAndCoordination.main" />
-      </profile>
-    </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="ManagementAndCoordination" target="17" />
-      <module name="ManagementCoordination" target="17" />
-      <module name="tawasalna-administration (1)" target="17" />
-      <module name="tawasalna-administration (2)" target="17" />
->>>>>>> 46f69d836760724a820c5367227af2f6eaaa535b
+      <module name="Resident-Support-Services" target="17" />
+      <module name="shared" target="17" />
+      <module name="tawasalna-administration" target="17" />
+      <module name="tawasalna-auth" target="17" />
+      <module name="tawasalna-backend-app" target="1.5" />
+      <module name="tawasalna-business" target="17" />
+      <module name="tawasalna-crm" target="17" />
+      <module name="tawasalna-pms" target="17" />
+      <module name="tawasalna-social" target="17" />
     </bytecodeTargetLevel>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-<<<<<<< HEAD
-      <module name="Resident-Support-Services" options="-parameters" />
-      <module name="shared" options="-parameters" />
-      <module name="tawasalna-administration" options="-parameters" />
-      <module name="tawasalna-auth" options="-parameters" />
-      <module name="tawasalna-auth (1)" options="-parameters" />
-      <module name="tawasalna-auth (2)" options="-parameters" />
-      <module name="tawasalna-business" options="-parameters" />
-      <module name="tawasalna-crm" options="-parameters" />
-      <module name="tawasalna-pms" options="-parameters" />
-=======
-      <module name="Management-Coordination" options="-parameters" />
-      <module name="ManagementCoordination" options="-parameters" />
-      <module name="shared" options="-parameters" />
-      <module name="tawasalna-administration" options="-parameters" />
-      <module name="tawasalna-administration (1)" options="-parameters" />
-      <module name="tawasalna-administration (2)" options="-parameters" />
-      <module name="tawasalna-auth" options="-parameters" />
-      <module name="tawasalna-business" options="-parameters" />
-      <module name="tawasalna-crisis" options="-parameters" />
-      <module name="tawasalna-crm" options="-parameters" />
-      <module name="tawasalna-facilities-management" options="-parameters" />
-      <module name="tawasalna-pms" options="-parameters" />
-      <module name="tawasalna-security-safety" options="-parameters" />
->>>>>>> 46f69d836760724a820c5367227af2f6eaaa535b
-      <module name="tawasalna-social" options="-parameters" />
-    </option>
   </component>
 </project>
