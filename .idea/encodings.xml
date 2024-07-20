@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+<<<<<<< HEAD
     <file url="file://$PROJECT_DIR$/Resident-Support-Services/src/main/java" charset="UTF-8" />
+=======
+    <file url="file://$PROJECT_DIR$/Management-Coordination/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ManagementCoordination/src/main/java" charset="UTF-8" />
+>>>>>>> 46f69d836760724a820c5367227af2f6eaaa535b
     <file url="file://$PROJECT_DIR$/shared/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tawasalna-administration/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tawasalna-auth/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tawasalna-business/src/main/java" charset="UTF-8" />
+<<<<<<< HEAD
     <file url="file://$PROJECT_DIR$/tawasalna-crm/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tawasalna-pms/src/main/java" charset="UTF-8" />
+=======
+    <file url="file://$PROJECT_DIR$/tawasalna-crisis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tawasalna-crm/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tawasalna-facilities-management/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tawasalna-pms/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tawasalna-security-safety/src/main/java" charset="UTF-8" />
+>>>>>>> 46f69d836760724a820c5367227af2f6eaaa535b
     <file url="file://$PROJECT_DIR$/tawasalna-social/src/main/java" charset="UTF-8" />
   </component>
 </project>
