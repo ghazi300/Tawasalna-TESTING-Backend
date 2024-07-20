@@ -1,40 +1,43 @@
 package com.example.residentsupportservices.Controlleur;
+
+import com.example.residentsupportservices.EmailRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.util.Map;
 
 @RestController
+@RequestMapping("/email")
 public class EmailController {
 
     @Autowired
-    private JavaMailSender javaMailSender;
+    private JavaMailSender mailSender;
 
-    @PostMapping("/sendEmail")
-    public void sendEventDetailsEmail(@RequestBody Map<String, Object> payload) throws MessagingException {
-        String recipientEmail = (String) payload.get("recipientEmail");
-        Map<String, Object> eventDetails = (Map<String, Object>) payload.get("eventDetails");
+    @PostMapping("/send")
+    public String sendEmail(@RequestBody EmailRequest emailRequest) {
+        try {
+            sendSimpleMessage(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getText());
+            return "Email sent successfully!";
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return "Error sending email: " + e.getMessage();
+        }
+    }
 
-        MimeMessage message = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+    private void sendSimpleMessage(String to, String subject, String text) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setTo(recipientEmail);
-        helper.setSubject("Détails de l'événement : " + eventDetails.get("title"));
-        helper.setText("Détails de l'événement :\n\n" +
-                "Titre : " + eventDetails.get("title") + "\n" +
-                "Start : " + eventDetails.get("start") + "\n" +
-                "End : " + eventDetails.get("end") + "\n" +
-                "Location : " + eventDetails.get("location") + "\n" +
-                "Description : " + eventDetails.get("description") + "\n" +
-                "Category : " + eventDetails.get("category") + "\n" +
-                "Max Participants : " + eventDetails.get("maxParticipants") + "\n" +
-                "Notes : " + eventDetails.get("notes"));
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(text, true); // true indicates HTML content
 
-        javaMailSender.send(message);
+        mailSender.send(message);
     }
 }

@@ -37,4 +37,7 @@ public class Event {
     private String imageUrl;
     private Integer maxParticipants;
     private String notes;
+    public Event(String id) {
+        this.id = id;
+    }
 }

@@ -1,21 +1,26 @@
 package com.example.residentsupportservices.services;
 
 import com.example.residentsupportservices.entity.Attendance;
+import com.example.residentsupportservices.entity.Event;
 import com.example.residentsupportservices.repository.AttendanceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class AttendanceService implements IAttendanceService {
 
     private final AttendanceRepository attendanceRepository;
+    private final IEventService eventService;  // Inject the EventService to find Event
 
-    @Autowired
-    public AttendanceService(AttendanceRepository attendanceRepository) {
-        this.attendanceRepository = attendanceRepository;
+    @Override
+    public Attendance createAttendance(Attendance attendance) {
+        if (attendance == null || attendance.getEvent() == null || attendance.getParticipantName() == null) {
+            throw new IllegalArgumentException("Attendance or required fields are missing");
+        }
+        return attendanceRepository.save(attendance);
     }
 
     @Override
@@ -24,28 +29,45 @@ public class AttendanceService implements IAttendanceService {
     }
 
     @Override
-    public Attendance getAttendanceById(String id) {
-        Optional<Attendance> attendance = attendanceRepository.findById(id);
-        return attendance.orElse(null); // Handle optional if necessary
+    public Attendance getAttendanceById(String attendanceId) {
+        return attendanceRepository.findById(attendanceId).orElse(null);
     }
 
     @Override
-    public Attendance createAttendance(Attendance attendance) {
-        return attendanceRepository.save(attendance);
-    }
-
-    @Override
-    public Attendance updateAttendance(String id, Attendance attendance) {
-        if (!attendanceRepository.existsById(id)) {
-            // Handle not found scenario or throw exception
-            return null;
+    public Attendance updateAttendance(String attendanceId, Attendance attendance) {
+        if (!attendanceRepository.existsById(attendanceId)) {
+            throw new IllegalArgumentException("Attendance not found");
         }
-        attendance.setId(id); // Set the ID to ensure update on existing entity
+        attendance.setId(attendanceId);
         return attendanceRepository.save(attendance);
     }
 
     @Override
-    public void deleteAttendance(String id) {
-        attendanceRepository.deleteById(id);
+    public void deleteAttendance(String attendanceId) {
+        attendanceRepository.deleteById(attendanceId);
+    }
+
+    @Override
+    public Attendance markAttendance(String eventId, String participantName, Boolean attended) {
+        Event event = eventService.getEventById(eventId);
+        if (event == null) {
+            throw new IllegalArgumentException("Event not found");
+        }
+        Attendance attendance = attendanceRepository.findByEventAndParticipantName(event, participantName);
+        if (attendance != null) {
+            attendance.setAttended(attended);
+            return attendanceRepository.save(attendance);
+        } else {
+            throw new IllegalArgumentException("Attendance not found for the given event and participant");
+        }
+    }
+
+    @Override
+    public List<Attendance> getAttendancesForEvent(String eventId) {
+        Event event = eventService.getEventById(eventId);
+        if (event == null) {
+            throw new IllegalArgumentException("Event not found");
+        }
+        return attendanceRepository.findByEvent(event);
     }
 }

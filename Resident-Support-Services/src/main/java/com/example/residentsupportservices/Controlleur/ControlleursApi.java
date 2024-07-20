@@ -9,9 +9,11 @@ import com.example.residentsupportservices.services.IEventService;
 import com.example.residentsupportservices.services.IFeedbackService;
 import com.example.residentsupportservices.services.IParticipantService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.http.HttpStatus;
 
 @RestController
 @AllArgsConstructor
@@ -117,9 +119,31 @@ public class ControlleursApi {
     }
 
     @PostMapping("/attendances")
-    public Attendance createAttendance(@RequestBody Attendance attendance) {
-        return attendanceService.createAttendance(attendance);
+    public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance) {
+        System.out.println("Received attendance: " + attendance);
+        if (attendance.getEvent() == null || attendance.getParticipantName() == null) {
+            throw new IllegalArgumentException("Attendance or required fields are missing");
+        }
+
+        Attendance createdAttendance = attendanceService.createAttendance(attendance);
+        return new ResponseEntity<>(createdAttendance, HttpStatus.CREATED); // Assurez-vous d'importer HttpStatus
     }
+
+
+
+    @PostMapping("/attendances/mark")
+    public ResponseEntity<Attendance> markAttendance(@RequestParam String eventId, @RequestParam String participantName, @RequestParam Boolean attended) {
+        Attendance attendance = attendanceService.markAttendance(eventId, participantName, attended);
+        return ResponseEntity.ok(attendance);
+    }
+
+    @GetMapping("/attendances/event/{eventId}")
+    public ResponseEntity<List<Attendance>> getAttendancesForEvent(@PathVariable String eventId) {
+        List<Attendance> attendances = attendanceService.getAttendancesForEvent(eventId);
+        return ResponseEntity.ok(attendances);
+    }
+
+
 
     @PutMapping("/attendances/{attendanceId}")
     public Attendance updateAttendance(@PathVariable String attendanceId, @RequestBody Attendance attendance) {
@@ -130,4 +154,5 @@ public class ControlleursApi {
     public void deleteAttendance(@PathVariable String attendanceId) {
         attendanceService.deleteAttendance(attendanceId);
     }
+
 }

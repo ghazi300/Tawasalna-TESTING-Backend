@@ -10,4 +10,6 @@ public interface IAttendanceService {
     Attendance createAttendance(Attendance attendance);
     Attendance updateAttendance(String id, Attendance attendance);
     void deleteAttendance(String id);
+    Attendance markAttendance(String eventId, String participantName, Boolean attended);
+    List<Attendance> getAttendancesForEvent(String eventId);
 }
