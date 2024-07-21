@@ -6,13 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="shared" />
         <module name="tawasalna-MaintenanceAgent" />
+      </profile>
+      <profile name="Annotation profile for tawasalna-backend-app" enabled="true">
+        <sourceOutputDir name="../target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="shared" />
+        <module name="tawasalna-administration" />
         <module name="tawasalna-social" />
+        <module name="tawasalna-auth" />
         <module name="tawasalna-business" />
         <module name="tawasalna-pms" />
-        <module name="tawasalna-administration" />
-        <module name="tawasalna-auth" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -25,15 +30,15 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="MaintenanceAgent" options="-parameters" />
-      <module name="shared" options="-parameters" />
+      <module name="shared" options="" />
       <module name="tawasalna-MaintenanceAgent" options="-parameters" />
-      <module name="tawasalna-administration" options="-parameters" />
-      <module name="tawasalna-auth" options="-parameters" />
+      <module name="tawasalna-administration" options="" />
+      <module name="tawasalna-auth" options="" />
       <module name="tawasalna-backend-app (2)" options="-parameters" />
-      <module name="tawasalna-business" options="-parameters" />
+      <module name="tawasalna-business" options="" />
       <module name="tawasalna-crm" options="-parameters" />
-      <module name="tawasalna-pms" options="-parameters" />
-      <module name="tawasalna-social" options="-parameters" />
+      <module name="tawasalna-pms" options="" />
+      <module name="tawasalna-social" options="" />
     </option>
   </component>
 </project>
