@@ -1,5 +1,5 @@
 package com.tawasalna.MaintenanceAgent.models;
 
 public enum TaskStatus {
-    Pending ,
+    PENDING,IN_PROGRESS,COMPLETED,CANCELED
 }

@@ -1,11 +1,10 @@
 package com.tawasalna.MaintenanceAgent.models;
 
-
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,13 +16,12 @@ import java.util.Date;
 public class Technicien {
 
     @Id
-    private String  id;
+    private String id;
     private Role role;
-    private String yearsOfExperience ;
-    private String name ;
-
-    private String ContactInfo	 ;
-    private String Certification;
+    private String yearsOfExperience;
+    private String name;
+    private String contactInfo;
+    private String certification;
     private Status status;
-
+    private List<String> assignedTaskId; // Nouvelle propriété optionnelle
 }

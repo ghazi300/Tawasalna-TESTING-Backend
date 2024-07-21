@@ -19,9 +19,10 @@ public class MaintenanceTask {
     private String  id;
 
     private String description;
-    private String type;
-    private String status;
-    private String priority;
+    private TaskStatus taskStatus;
+    private Priority priority;
     private Date createdAt;
     private String comments;
+    private String assignedTaskId; // Nouvelle propriété optionnelle
+
 }

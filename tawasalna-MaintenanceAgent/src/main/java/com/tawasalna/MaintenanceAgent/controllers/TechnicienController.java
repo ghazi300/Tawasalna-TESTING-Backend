@@ -49,6 +49,8 @@ public class TechnicienController {
 
             updatedTechnicien.setCertification(technicienDetails.getCertification());
             updatedTechnicien.setStatus(technicienDetails.getStatus());
+            updatedTechnicien.setAssignedTaskId(technicienDetails.getAssignedTaskId()); // Mise à jour de la propriété
+
             Technicien savedTechnicien = technicienRepository.save(updatedTechnicien);
             return ResponseEntity.ok(savedTechnicien);
         } else {

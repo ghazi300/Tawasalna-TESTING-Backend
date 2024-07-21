@@ -37,22 +37,7 @@ public class AsignedTaskController {
         return assignedTask.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<AsignedTask> updateAssignedTask(@PathVariable String id, @RequestBody AsignedTask assignedTaskDetails) {
-        Optional<AsignedTask> existingTask = asignedTaskRepository.findById(id);
-        if (existingTask.isPresent()) {
-            AsignedTask updatedTask = existingTask.get();
-            updatedTask.setMaintenanceTask(assignedTaskDetails.getMaintenanceTask());
-            updatedTask.setTaskStatus(assignedTaskDetails.getTaskStatus());
-            updatedTask.setDateDebut(assignedTaskDetails.getDateDebut());
-            updatedTask.setDateFin(assignedTaskDetails.getDateFin());
-            updatedTask.setEquipements(assignedTaskDetails.getEquipements());
-            AsignedTask savedTask = asignedTaskRepository.save(updatedTask);
-            return ResponseEntity.ok(savedTask);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAssignedTask(@PathVariable String id) {

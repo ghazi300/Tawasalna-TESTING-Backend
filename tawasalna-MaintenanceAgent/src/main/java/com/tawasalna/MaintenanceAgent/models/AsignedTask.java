@@ -1,6 +1,7 @@
 package com.tawasalna.MaintenanceAgent.models;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -16,11 +17,15 @@ import java.util.List;
 public class AsignedTask {
 
 
+    @Id
+    private String  id;
 
-    private MaintenanceTask maintenanceTask;
-    private List<Technicien> techniciens ;
+
+    private String maintenanceTaskId;
+    private List<String> technicienId ;
     private TaskStatus taskStatus;
     private Date dateDebut;
     private Date dateFin;
-    private List<String> equipements;
+    private String equipement;
+
 }

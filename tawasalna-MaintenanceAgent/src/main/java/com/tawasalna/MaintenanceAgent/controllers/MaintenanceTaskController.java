@@ -43,11 +43,13 @@ public class MaintenanceTaskController {
         if (existingTask.isPresent()) {
             MaintenanceTask updatedTask = existingTask.get();
             updatedTask.setDescription(taskDetails.getDescription());
-            updatedTask.setType(taskDetails.getType());
-            updatedTask.setStatus(taskDetails.getStatus());
+            updatedTask.setTaskStatus(taskDetails.getTaskStatus());
             updatedTask.setPriority(taskDetails.getPriority());
             updatedTask.setComments(taskDetails.getComments());
+            updatedTask.setAssignedTaskId(taskDetails.getAssignedTaskId()); // Mise à jour de la propriété
+
             MaintenanceTask savedTask = maintenanceTaskRepository.save(updatedTask);
+
             return ResponseEntity.ok(savedTask);
         } else {
             return ResponseEntity.notFound().build();
