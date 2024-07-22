@@ -8,6 +8,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -29,6 +30,8 @@ public class Incident implements Serializable {
     @NotBlank(message = "Title is mandatory")
     @Size(max = 100, message = "Title cannot exceed 100 characters")
     String title;
+    @NotBlank(message = "Title is mandatory")
+    Type type;
 
     @NotBlank(message = "Description is mandatory")
     @Size(max = 500, message = "Description cannot exceed 500 characters")
@@ -49,5 +52,7 @@ public class Incident implements Serializable {
 
     @NotNull(message = "Status is mandatory")
     Status status = Status.EN_COURS;
-    private List<String> resourceIds;
+    @DBRef
+    List<Resource> resources;
+    List<String> images;
 }
