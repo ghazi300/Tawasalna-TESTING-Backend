@@ -2,17 +2,20 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="shared" />
+        <module name="tawasalna-crisis" />
+        <module name="tawasalna-security-safety" />
         <module name="tawasalna-social" />
         <module name="tawasalna-business" />
         <module name="tawasalna-pms" />
         <module name="tawasalna-administration" />
-        <module name="Management-Coordination" />
         <module name="tawasalna-auth" />
+        <module name="tawasalna-facilities-management" />
         <module name="tawasalna-crm" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
@@ -21,6 +24,12 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.32/17d46b3e205515e1e8efd3ee4d57ce8018914163/lombok-1.18.32.jar" />
         </processorPath>
         <module name="ManagementAndCoordination.main" />
+      </profile>
+      <profile name="Annotation profile for Management-Coordination" enabled="true">
+        <sourceOutputDir name="../target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Management-Coordination" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -32,7 +41,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Management-Coordination" options="-parameters" />
+      <module name="Management-Coordination" options="" />
       <module name="ManagementCoordination" options="-parameters" />
       <module name="shared" options="-parameters" />
       <module name="tawasalna-administration" options="-parameters" />
@@ -40,8 +49,11 @@
       <module name="tawasalna-administration (2)" options="-parameters" />
       <module name="tawasalna-auth" options="-parameters" />
       <module name="tawasalna-business" options="-parameters" />
+      <module name="tawasalna-crisis" options="-parameters" />
       <module name="tawasalna-crm" options="-parameters" />
+      <module name="tawasalna-facilities-management" options="-parameters" />
       <module name="tawasalna-pms" options="-parameters" />
+      <module name="tawasalna-security-safety" options="-parameters" />
       <module name="tawasalna-social" options="-parameters" />
     </option>
   </component>
