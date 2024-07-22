@@ -15,6 +15,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ParkingLotController {
     IParkingLot iParkingLot;
+
     @PostMapping("addparkinglot")
     public ResponseEntity<ParkingLot> addParkingLot(@RequestBody ParkingLot parkingLot){
         try{

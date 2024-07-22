@@ -19,6 +19,7 @@
 
     <properties>
         <netty-socketio.version>2.0.3</netty-socketio.version>
+
     </properties>
 
     <dependencies>
@@ -125,6 +126,7 @@
             <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
