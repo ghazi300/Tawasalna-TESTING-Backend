@@ -330,3 +330,13 @@
 
             type: NodePort
 
+spring:
+  mail:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          protocol: smtp
+        starttls:
+          enable: false
+        debug: true
