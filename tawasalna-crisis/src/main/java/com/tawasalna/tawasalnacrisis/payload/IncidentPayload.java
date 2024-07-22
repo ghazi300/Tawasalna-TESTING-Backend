@@ -1,6 +1,7 @@
 package com.tawasalna.tawasalnacrisis.payload;
 
 import com.tawasalna.tawasalnacrisis.models.Gravite;
+import com.tawasalna.tawasalnacrisis.models.Type;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,7 +20,9 @@ import java.util.List;
 public class IncidentPayload {
     String title;
     String description;
+    Type type;
     String location;
     LocalDateTime date;
     Gravite gravite;
+    List<String> images;
 }
