@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @Document(collection = "resources")
 @Data
 @NoArgsConstructor
@@ -19,5 +21,6 @@ public class Resource {
     private Type type;
     private Availability availability;
     private String location;
+    private List<String> images;
 
 }

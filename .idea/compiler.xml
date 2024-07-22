@@ -11,6 +11,7 @@
         <module name="tawasalna-security-safety" />
         <module name="tawasalna-social" />
         <module name="tawasalna-business" />
+        <module name="tawasalna-community-engagement" />
         <module name="tawasalna-pms" />
         <module name="tawasalna-administration" />
         <module name="Management-Coordination" />
@@ -43,6 +44,7 @@
       <module name="tawasalna-administration (2)" options="-parameters" />
       <module name="tawasalna-auth" options="-parameters" />
       <module name="tawasalna-business" options="-parameters" />
+      <module name="tawasalna-community-engagement" options="-parameters" />
       <module name="tawasalna-crisis" options="-parameters" />
       <module name="tawasalna-crm" options="-parameters" />
       <module name="tawasalna-facilities-management" options="-parameters" />
