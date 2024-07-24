@@ -1,9 +1,7 @@
 package com.tawasalna.facilitiesmanagement.controller;
 
-import com.tawasalna.facilitiesmanagement.models.ParkingLot;
 import com.tawasalna.facilitiesmanagement.models.ParkingSpace;
 import com.tawasalna.facilitiesmanagement.models.ParkingSubSpace;
-import com.tawasalna.facilitiesmanagement.service.IParkingLot;
 import com.tawasalna.facilitiesmanagement.service.IParkingSpace;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -61,7 +59,7 @@ public class ParkingSpaceController {
 
     @DeleteMapping("deleteparkingspace/{id}")
     public ResponseEntity<Void> deleteParkingSpace(@PathVariable String id) {
-        iParkingSpace.delete(id);
+        iParkingSpace.deletespace(id);
         return ResponseEntity.noContent().build();
     }
 
