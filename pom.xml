@@ -134,6 +134,8 @@
         <module>tawasalna-business</module>
         <module>tawasalna-pms</module>
         <module>tawasalna-crm</module>
+        <module>tawasalna-operations</module>
+
     </modules>
 
     <build>

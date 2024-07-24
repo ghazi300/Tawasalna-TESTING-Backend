@@ -1,0 +1,7 @@
+com\tawasalna\auth\businesslogic\AssistanceServiceTest.class
+com\tawasalna\auth\businesslogic\AuthServiceImplTest.class
+com\tawasalna\auth\businesslogic\RoleServiceImplTest.class
+com\tawasalna\auth\businesslogic\PMSAuthServiceImpTest.class
+com\tawasalna\auth\businesslogic\UserManagementServiceTest.class
+com\tawasalna\auth\businesslogic\ResidentManagementServiceImplTest.class
+com\tawasalna\auth\businesslogic\PmsUsersManagementServiceImpTest.class
