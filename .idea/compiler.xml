@@ -3,17 +3,41 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="shared" />
+        <module name="tawasalna-social" />
+        <module name="tawasalna-community-engagement" />
+        <module name="tawasalna-pms" />
+        <module name="Management-Coordination" />
+        <module name="tawasalna-administration" />
+        <module name="tawasalna-crm" />
+        <module name="tawasalna-crisis" />
+        <module name="tawasalna-security-safety" />
+        <module name="tawasalna-business" />
+        <module name="tawasalna-auth" />
+        <module name="Resident-Support-Services" />
+        <module name="tawasalna-facilities-management" />
+      </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Resident-Support-Services" target="17" />
-      <module name="shared" target="17" />
-      <module name="tawasalna-administration" target="17" />
-      <module name="tawasalna-auth" target="17" />
-      <module name="tawasalna-backend-app" target="1.5" />
-      <module name="tawasalna-business" target="17" />
-      <module name="tawasalna-crm" target="17" />
-      <module name="tawasalna-pms" target="17" />
-      <module name="tawasalna-social" target="17" />
-    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Management-Coordination" options="-parameters" />
+      <module name="Resident-Support-Services" options="-parameters" />
+      <module name="shared" options="-parameters" />
+      <module name="tawasalna-administration" options="-parameters" />
+      <module name="tawasalna-auth" options="-parameters" />
+      <module name="tawasalna-business" options="-parameters" />
+      <module name="tawasalna-community-engagement" options="-parameters" />
+      <module name="tawasalna-crisis" options="-parameters" />
+      <module name="tawasalna-crm" options="-parameters" />
+      <module name="tawasalna-facilities-management" options="-parameters" />
+      <module name="tawasalna-pms" options="-parameters" />
+      <module name="tawasalna-security-safety" options="-parameters" />
+      <module name="tawasalna-social" options="-parameters" />
+    </option>
   </component>
 </project>

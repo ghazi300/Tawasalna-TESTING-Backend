@@ -1,25 +1,13 @@
-<<<<<<< HEAD
-<project version="4">
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
-=======
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/ManagementAndCoordination" />
   </component>
->>>>>>> 46f69d836760724a820c5367227af2f6eaaa535b
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-<<<<<<< HEAD
         <option value="$PROJECT_DIR$/Resident-Support-Services/pom.xml" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK" />
-=======
         <option value="$PROJECT_DIR$/ManagementCoordination/pom.xml" />
         <option value="$PROJECT_DIR$/Management-Coordination/pom.xml" />
       </list>
@@ -30,9 +18,8 @@
       </set>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="20" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK" />
   <component name="ProjectType">
     <option name="id" value="jpab" />
   </component>
->>>>>>> 46f69d836760724a820c5367227af2f6eaaa535b
 </project>
