@@ -7,12 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="shared" />
+        <module name="tawasalna-crisis" />
+        <module name="tawasalna-security-safety" />
         <module name="tawasalna-social" />
         <module name="tawasalna-business" />
         <module name="tawasalna-pms" />
         <module name="tawasalna-administration" />
         <module name="Management-Coordination" />
         <module name="tawasalna-auth" />
+        <module name="tawasalna-facilities-management" />
         <module name="tawasalna-crm" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
@@ -40,8 +43,11 @@
       <module name="tawasalna-administration (2)" options="-parameters" />
       <module name="tawasalna-auth" options="-parameters" />
       <module name="tawasalna-business" options="-parameters" />
+      <module name="tawasalna-crisis" options="-parameters" />
       <module name="tawasalna-crm" options="-parameters" />
+      <module name="tawasalna-facilities-management" options="-parameters" />
       <module name="tawasalna-pms" options="-parameters" />
+      <module name="tawasalna-security-safety" options="-parameters" />
       <module name="tawasalna-social" options="-parameters" />
     </option>
   </component>

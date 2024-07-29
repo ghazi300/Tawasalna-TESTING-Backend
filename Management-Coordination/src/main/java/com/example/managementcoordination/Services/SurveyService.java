@@ -1,11 +1,9 @@
 package com.example.managementcoordination.Services;
 
-import com.example.managementcoordination.Survey;
-import com.example.managementcoordination.SurveyRepository;
+import com.example.managementcoordination.entities.Survey;
+import com.example.managementcoordination.repositories.SurveyRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.HashMap;
 import java.util.List;
