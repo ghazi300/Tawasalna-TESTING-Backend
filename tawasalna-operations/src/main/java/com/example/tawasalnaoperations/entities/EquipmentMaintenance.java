@@ -7,19 +7,21 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 
-@Document(collection = "landscaping_schedule")
+@Document(collection = "equipment_maintenance")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MaintenanceSchedule {
+public class EquipmentMaintenance {
     @Id
-    private String scheduleId;
-    private String gardenId;
-    private Date dateDebut;
-    private Date dateFin;
-    private List<String> tasks;
+    private String maintenanceId;
+    private String equipmentId;
+    private Date maintenanceDate;
+    private String tasksPerformed;
+    private String status;
+
+
 }

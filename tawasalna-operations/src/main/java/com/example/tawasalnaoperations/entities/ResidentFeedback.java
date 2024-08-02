@@ -8,18 +8,18 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-import java.util.List;
 
-@Document(collection = "landscaping_schedule")
+@Document(collection = "residentFeedbacks")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MaintenanceSchedule {
+public class ResidentFeedback {
     @Id
-    private String scheduleId;
-    private String gardenId;
-    private Date dateDebut;
-    private Date dateFin;
-    private List<String> tasks;
+    private String feedbackId;
+    private String residentId;
+    private Date feedbackDate;
+    private String comments;
+   // private int rating;
+
 }
