@@ -49,4 +49,11 @@ public class ParkingLotImpl implements  IParkingLot{
                 .orElseThrow(() -> new RuntimeException(id));
         parkingLotRepository.deleteById(id);
     }
+
+    @Override
+    public long getDistinctLocationCount() {
+        return parkingLotRepository.count();
+    }
+
+
 }

@@ -65,5 +65,13 @@ public class ParkingLotController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("getcount")
+    public ResponseEntity<Long> getActiveVehicleCount() {
+        try {
+            return new ResponseEntity<>(iParkingLot.getDistinctLocationCount(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

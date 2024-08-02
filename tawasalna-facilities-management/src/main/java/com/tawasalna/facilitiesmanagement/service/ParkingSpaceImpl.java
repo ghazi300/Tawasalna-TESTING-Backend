@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class ParkingSpaceImpl implements IParkingSpace{
+public class ParkingSpaceImpl  implements IParkingSpace   {
     private final ParkingSpaceRepository parkingSpaceRepository;
     private final ParkingLotRepository parkingLotRepository;
     private final ParkingSubSpaceRepository parkingSubSpaceRepository;
@@ -43,18 +43,10 @@ public class ParkingSpaceImpl implements IParkingSpace{
 
         ParkingSpace savedParkingSpace = parkingSpaceRepository.save(parkingSpace);
 
-      /*  for (ParkingSubSpace subSpace : parkingSpace.getSubSpaces()) {
-            if (subSpace != null) {
-
-               subSpace.setParkingSpaceId(savedParkingSpace);
-                parkingSubSpaceRepository.save(subSpace);
-            }
-        }*/
-        // Create ParkingSubSpace instances based on capacity
         int capacity = parkingSpace.getCapacity();
         for (int i = 1; i <= capacity; i++) {
             ParkingSubSpace subSpace = new ParkingSubSpace();
-            subSpace.setParkingSpaceId(savedParkingSpace);
+            subSpace.setParkingSpaceref(savedParkingSpace);
             subSpace.setStationNumber(parkingSpace.getLocationNumber()+'.' + i);
             subSpace.setStatus(ParkingSubSpaceStatus.AVAILABLE);
 
@@ -65,63 +57,55 @@ public class ParkingSpaceImpl implements IParkingSpace{
     }
 
     @Override
+
     public ParkingSpace update(String id, ParkingSpace parkingSpace) {
         ParkingSpace existingParkingSpace = parkingSpaceRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("ParkingSpace with id " + id + " not found"));
 
         existingParkingSpace.setLocationNumber(parkingSpace.getLocationNumber());
-        existingParkingSpace.setCapacity(parkingSpace.getCapacity());
         existingParkingSpace.setOccupiedSpaces(parkingSpace.getOccupiedSpaces());
-        if (parkingSpace.getSubSpaces() != null) {
-            for (ParkingSubSpace subSpace : parkingSpace.getSubSpaces()) {
-                ParkingSubSpace existingSubSpace = parkingSubSpaceRepository.findById(subSpace.getSubSpaceId())
-                        .orElseThrow(() -> new IllegalArgumentException("ParkingSubSpace with id " + subSpace.getSubSpaceId() + " not found"));
 
-                existingSubSpace.setStationNumber(subSpace.getStationNumber());
-                existingSubSpace.setStatus(subSpace.getStatus());
+        int oldCapacity = existingParkingSpace.getCapacity();
+        int newCapacity = parkingSpace.getCapacity();
+        existingParkingSpace.setCapacity(newCapacity);
+
+        List<ParkingSubSpace> subSpaces = parkingSubSpaceRepository.findByParkingSpaceref(existingParkingSpace.getParkingSpaceId());
+
+        if (subSpaces != null) {
+            for (int i = 0; i < subSpaces.size(); i++) {
+                ParkingSubSpace existingSubSpace = subSpaces.get(i);
+                existingSubSpace.setStationNumber(parkingSpace.getLocationNumber() + '.' + (i + 1));
                 parkingSubSpaceRepository.save(existingSubSpace);
             }
         }
+
+        if (newCapacity > oldCapacity) {
+            for (int i = oldCapacity + 1; i <= newCapacity; i++) {
+                ParkingSubSpace newSubSpace = new ParkingSubSpace();
+                newSubSpace.setParkingSpaceref(existingParkingSpace);
+                newSubSpace.setStationNumber(parkingSpace.getLocationNumber() + '.' + i);
+                newSubSpace.setStatus(ParkingSubSpaceStatus.AVAILABLE);
+                parkingSubSpaceRepository.save(newSubSpace);
+            }
+        }
+
         return parkingSpaceRepository.save(existingParkingSpace);
     }
 
     @Override
     public void deletespace(String id) {
-      /*  ParkingSpace existingParkingSpace = parkingSpaceRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("ParkingSpace with id " + id + " not found"));
-
-          List<ParkingSubSpace> subSpaces = existingParkingSpace.getSubSpaces();
-
-           if (subSpaces != null) {
-            for (ParkingSubSpace subSpace : subSpaces) {
-                 log.info(String.valueOf(subSpace));
-                // Delete the ParkingSubSpace
-                parkingSubSpaceRepository.delete(subSpace);
-            }
-
-            log.info("apres"+subSpaces.toString());
-
-        }*/
-
-
-       /* parkingSubSpaceRepository.deleteByParkingSpaceId(id);*/
-
-
-        // Finally, delete the ParkingSpace
-       // parkingSpaceRepository.delete(existingParkingSpace);
-
-
-            // Find the ParkingSpace by its ID
+        try {
             ParkingSpace existingParkingSpace = parkingSpaceRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("ParkingSpace with id " + id + " not found"));
 
-            // Retrieve associated ParkingSubSpaces
-            List<ParkingSubSpace> subSpaces = parkingSpaceRepository.findSubSpacesByParkingSpaceId(id);
-        System.out.println("******************");
-        System.out.println(subSpaces);
-        System.out.println("******************");
+            System.out.println("****************");
+            System.out.println(existingParkingSpace);
+            System.out.println("****************");
 
-        // Delete associated ParkingSubSpaces if they exist
+            List<ParkingSubSpace> subSpaces = parkingSubSpaceRepository.findByParkingSpaceref(existingParkingSpace.getParkingSpaceId());
+            System.out.println(subSpaces);
+            System.out.println("****************");
+
             if (subSpaces != null && !subSpaces.isEmpty()) {
                 for (ParkingSubSpace subSpace : subSpaces) {
                     try {
@@ -136,14 +120,16 @@ public class ParkingSpaceImpl implements IParkingSpace{
                 log.info("No associated ParkingSubSpaces found for ParkingSpace ID: " + id);
             }
 
-            // Finally, delete the ParkingSpace
-            try {
-                parkingSpaceRepository.delete(existingParkingSpace);
-                log.info("Deleted ParkingSpace with ID: " + id);
-            } catch (Exception e) {
-                log.error("Error deleting ParkingSpace with ID: " + id, e);
-            }
+            // Delete the ParkingSpace
+           parkingSpaceRepository.delete(existingParkingSpace);
+            log.info("Deleted ParkingSpace with ID: " + id);
 
-
+        } catch (Exception e) {
+            log.error("Error deleting ParkingSpace with ID: " + id, e);
+        }
     }
+
+
+
+
 }

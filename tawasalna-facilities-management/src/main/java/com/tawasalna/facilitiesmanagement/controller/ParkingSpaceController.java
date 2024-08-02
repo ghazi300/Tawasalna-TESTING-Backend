@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("parkingspace")
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ParkingSpaceController {
     IParkingSpace iParkingSpace;
     @PostMapping("addparkingSpace")
@@ -21,7 +21,7 @@ public class ParkingSpaceController {
         try {
             return new ResponseEntity<>(iParkingSpace.addParkingSpace(parkingSpace), HttpStatus.CREATED);
         } catch (Exception e) {
-            e.printStackTrace(); // This will print the stack trace to the logs
+            e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -33,6 +33,14 @@ public class ParkingSpaceController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+  /*  @GetMapping("getparkingspacesub/{id}")
+    public ResponseEntity<List<ParkingSubSpace>> getPark( @PathVariable String id) {
+        try {
+            return new ResponseEntity<>(iParkingSpace.getParkingSubbyid(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }*/
     @GetMapping("getparkingSubspace")
     public ResponseEntity<List<ParkingSubSpace>> getParkingsubspace() {
         try {

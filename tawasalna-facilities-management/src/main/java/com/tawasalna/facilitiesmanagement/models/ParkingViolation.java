@@ -25,4 +25,5 @@ public class ParkingViolation {
     private LocalDateTime issueDate;
    private  LocalDateTime paymentDate;
 
+
 }
