@@ -1,56 +1,62 @@
-package com.example.residentsupportservices.controllers;
+    package com.example.residentsupportservices.controllers;
 
-import com.example.residentsupportservices.entity.Attendance;
-import com.example.residentsupportservices.entity.Event;
-import com.example.residentsupportservices.entity.Feedback;
-import com.example.residentsupportservices.entity.Participant;
-import com.example.residentsupportservices.services.IAttendanceService;
-import com.example.residentsupportservices.services.IEventService;
-import com.example.residentsupportservices.services.IFeedbackService;
-import com.example.residentsupportservices.services.IParticipantService;
-import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+    import com.example.residentsupportservices.Entity.Pet;
+    import com.example.residentsupportservices.Entity.Vaccination;
+    import com.example.residentsupportservices.Services.IPetService;
+    import com.example.residentsupportservices.Services.IVaccinationService;
+    import com.example.residentsupportservices.entity.Attendance;
+    import com.example.residentsupportservices.entity.Event;
+    import com.example.residentsupportservices.entity.Feedback;
+    import com.example.residentsupportservices.entity.Participant;
+    import com.example.residentsupportservices.services.IAttendanceService;
+    import com.example.residentsupportservices.services.IEventService;
+    import com.example.residentsupportservices.services.IFeedbackService;
+    import com.example.residentsupportservices.services.IParticipantService;
+    import lombok.AllArgsConstructor;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import org.springframework.http.HttpStatus;
+    import java.util.List;
+    import org.springframework.http.HttpStatus;
 
-@RestController
-@AllArgsConstructor
-@RequestMapping("/api")
-public class ControlleursApi {
+    @RestController
+    @AllArgsConstructor
+    @RequestMapping("/api")
+    public class ControlleursApi {
 
-    private IEventService eventService;
-    private IParticipantService participantService;
-    private IFeedbackService feedbackService;
-    private IAttendanceService attendanceService;
+        private IEventService eventService;
+        private IParticipantService participantService;
+        private IFeedbackService feedbackService;
+        private IAttendanceService attendanceService;
+        private IPetService petService;
+        private IVaccinationService vaccinationService;
 
-    // Endpoints pour l'entité Event
+        // Endpoints pour l'entité Event
 
-    @GetMapping("/events")
-    public List<Event> getAllEvents() {
-        return eventService.getAllEvents();
-    }
+        @GetMapping("/events")
+        public List<Event> getAllEvents() {
+            return eventService.getAllEvents();
+        }
 
-    @GetMapping("/events/{eventId}")
-    public Event getEventById(@PathVariable String eventId) {
-        return eventService.getEventById(eventId);
-    }
+        @GetMapping("/events/{eventId}")
+        public Event getEventById(@PathVariable String eventId) {
+            return eventService.getEventById(eventId);
+        }
 
-    @PostMapping("/events")
-    public Event createEvent(@RequestBody Event event) {
-        return eventService.createEvent(event);
-    }
+        @PostMapping("/events")
+        public Event createEvent(@RequestBody Event event) {
+            return eventService.createEvent(event);
+        }
 
-    @PutMapping("/events/{eventId}")
-    public Event updateEvent(@PathVariable String eventId, @RequestBody Event event) {
-        return eventService.updateEvent(eventId, event);
-    }
+        @PutMapping("/events/{eventId}")
+        public Event updateEvent(@PathVariable String eventId, @RequestBody Event event) {
+            return eventService.updateEvent(eventId, event);
+        }
 
-    @DeleteMapping("/events/{eventId}")
-    public void deleteEvent(@PathVariable String eventId) {
-        eventService.deleteEvent(eventId);
-    }
+        @DeleteMapping("/events/{eventId}")
+        public void deleteEvent(@PathVariable String eventId) {
+            eventService.deleteEvent(eventId);
+        }
 
     // Endpoints pour l'entité Participant
 
@@ -155,4 +161,62 @@ public class ControlleursApi {
         attendanceService.deleteAttendance(attendanceId);
     }
 
-}
+// Endpoints pour l'entité Pet
+
+    @PostMapping("/pets")
+    public ResponseEntity<Pet> addPet(@RequestBody Pet pet) {
+        return ResponseEntity.ok(petService.addPet(pet));
+    }
+
+    @PutMapping("/pets/{id}")
+    public ResponseEntity<Pet> updatePet(@PathVariable String id, @RequestBody Pet petDetails) {
+        return ResponseEntity.ok(petService.updatePet(id, petDetails));
+    }
+
+    @DeleteMapping("/pets/{id}")
+    public ResponseEntity<Void> deletePet(@PathVariable String id) {
+        petService.deletePet(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/pets/{id}")
+    public ResponseEntity<Pet> getPetById(@PathVariable String id) {
+        return ResponseEntity.ok(petService.getPetById(id));
+    }
+
+    @GetMapping("/pets")
+    public ResponseEntity<List<Pet>> getAllPets() {
+        return ResponseEntity.ok(petService.getAllPets());
+    }
+        // Endpoints pour l'entité Vaccination
+
+        @GetMapping("/vaccinations")
+        public List<Vaccination> getAllVaccinations() {
+            return vaccinationService.getAllVaccinations();
+        }
+
+        @GetMapping("/vaccinations/{vaccinationId}")
+        public Vaccination getVaccinationById(@PathVariable String vaccinationId) {
+            return vaccinationService.getVaccinationById(vaccinationId).orElse(null);
+        }
+
+        @PostMapping("/vaccinations")
+        public Vaccination createVaccination(@RequestBody Vaccination vaccination) {
+            return vaccinationService.addVaccination(vaccination);
+        }
+
+        @PutMapping("/vaccinations/{vaccinationId}")
+        public Vaccination updateVaccination(@PathVariable String vaccinationId, @RequestBody Vaccination vaccination) {
+            return vaccinationService.updateVaccination(vaccinationId, vaccination);
+        }
+
+        @DeleteMapping("/vaccinations/{vaccinationId}")
+        public void deleteVaccination(@PathVariable String vaccinationId) {
+            vaccinationService.deleteVaccination(vaccinationId);
+        }
+
+        @GetMapping("/pets/{petId}/vaccinations")
+        public List<Vaccination> getVaccinationsByPetId(@PathVariable String petId) {
+            return vaccinationService.getVaccinationsByPetId(petId);
+        }
+    }
