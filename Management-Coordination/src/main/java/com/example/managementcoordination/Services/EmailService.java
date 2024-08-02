@@ -14,18 +14,28 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class EmailService {
     @Autowired
     private JavaMailSender javaMailSender;
+    private AtomicInteger emailCount = new AtomicInteger(0);
+    private List<Date> emailTimestamps = new ArrayList<>();
+    private AtomicInteger responseCount = new AtomicInteger(0);
+
 
     public void sendNewsletter(String subject, String content, List<String> recipients , MultipartFile pdf) {
         MimeMessage mimeMessage = createMimeMessage(subject, content, recipients , pdf);
         javaMailSender.send(mimeMessage);
+        emailCount.incrementAndGet();
+        emailTimestamps.add(new Date());
+
     }
 
     private MimeMessage createMimeMessage(String subject, String content, List<String> recipients, MultipartFile pdf) {
@@ -95,5 +105,26 @@ public class EmailService {
                 "</html>";
     }
 
+    public int getTotalEmailsSent() {
+        return emailCount.get();
+    }
 
+
+    public int getTotalEmailsSentInTimeFrame(Date start, Date end) {
+        return (int) emailTimestamps.stream()
+                .filter(timestamp -> !timestamp.before(start) && !timestamp.after(end))
+                .count();
+    }
+    public void recordResponse() {
+        responseCount.incrementAndGet();
+    }
+    public int getTotalResponses() {
+        return responseCount.get();
+    }
+    public double getResponsePercentage() {
+        int totalEmails = emailCount.get();
+        int totalResponses = responseCount.get();
+        if (totalEmails == 0) return 0.0;
+        return (totalResponses / (double) totalEmails) * 100;
+    }
 }

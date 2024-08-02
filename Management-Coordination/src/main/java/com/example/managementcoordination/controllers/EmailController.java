@@ -2,9 +2,14 @@ package com.example.managementcoordination.controllers;
 
 import com.example.managementcoordination.Services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +63,28 @@ public class EmailController {
        emailService.sendNewsletter("Your Daily Newsletter", content, subscribers, null);
        return "Daily newsletter sent successfully";
    }
+    @GetMapping("/total-emails-sent")
+    public int getTotalEmailsSent() {
+        return emailService.getTotalEmailsSent();
+    }
 
+    @GetMapping("/total-emails-sent-in-timeframe")
+    public ResponseEntity<Integer> getTotalEmailsSentInTimeFrame(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
+        Date startDate = Date.from(start.toInstant(ZoneOffset.UTC));
+        Date endDate = Date.from(end.toInstant(ZoneOffset.UTC));
+        return ResponseEntity.ok(emailService.getTotalEmailsSentInTimeFrame(startDate, endDate));
+    }
+
+    @GetMapping("/total-responses")
+    public int getTotalResponses() {
+        return emailService.getTotalResponses();
+    }
+
+    @GetMapping("/response-percentage")
+    public double getResponsePercentage() {
+        return emailService.getResponsePercentage();
+    }
 }
 
