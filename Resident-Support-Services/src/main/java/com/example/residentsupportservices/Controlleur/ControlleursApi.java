@@ -1,7 +1,9 @@
     package com.example.residentsupportservices.controllers;
 
     import com.example.residentsupportservices.Entity.Pet;
+    import com.example.residentsupportservices.Entity.PetBoarding;
     import com.example.residentsupportservices.Entity.Vaccination;
+    import com.example.residentsupportservices.Services.IPetBoardingService;
     import com.example.residentsupportservices.Services.IPetService;
     import com.example.residentsupportservices.Services.IVaccinationService;
     import com.example.residentsupportservices.entity.Attendance;
@@ -30,6 +32,8 @@
         private IAttendanceService attendanceService;
         private IPetService petService;
         private IVaccinationService vaccinationService;
+
+        private IPetBoardingService petBoardingService;
 
         // Endpoints pour l'entité Event
 
@@ -218,5 +222,31 @@
         @GetMapping("/pets/{petId}/vaccinations")
         public List<Vaccination> getVaccinationsByPetId(@PathVariable String petId) {
             return vaccinationService.getVaccinationsByPetId(petId);
+        }
+        // Endpoints pour l'entité PetBoarding
+
+        @GetMapping("/pet-boardings")
+        public List<PetBoarding> getAllPetBoardings() {
+            return petBoardingService.getAllPetBoardings();
+        }
+
+        @GetMapping("/pet-boardings/{boardingId}")
+        public PetBoarding getPetBoardingById(@PathVariable String boardingId) {
+            return petBoardingService.getPetBoardingById(boardingId);
+        }
+
+        @PostMapping("/pet-boardings")
+        public PetBoarding createPetBoarding(@RequestBody PetBoarding petBoarding) {
+            return petBoardingService.addPetBoarding(petBoarding);
+        }
+
+        @PutMapping("/pet-boardings/{boardingId}")
+        public PetBoarding updatePetBoarding(@PathVariable String boardingId, @RequestBody PetBoarding petBoarding) {
+            return petBoardingService.updatePetBoarding(boardingId, petBoarding);
+        }
+
+        @DeleteMapping("/pet-boardings/{boardingId}")
+        public void deletePetBoarding(@PathVariable String boardingId) {
+            petBoardingService.deletePetBoarding(boardingId);
         }
     }
