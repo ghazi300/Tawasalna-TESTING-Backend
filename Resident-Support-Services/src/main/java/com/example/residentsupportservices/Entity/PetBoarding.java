@@ -25,4 +25,6 @@ public class PetBoarding {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
     private String notes;
+    private String status; // Added status field
+
 }

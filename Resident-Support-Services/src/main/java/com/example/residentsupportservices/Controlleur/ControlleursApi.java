@@ -249,4 +249,18 @@
         public void deletePetBoarding(@PathVariable String boardingId) {
             petBoardingService.deletePetBoarding(boardingId);
         }
+
+        // Endpoint to confirm a pet boarding request
+        @PutMapping("/pet-boardings/confirm/{id}")
+        public ResponseEntity<?> confirmBoarding(@PathVariable String id) {
+            petBoardingService.confirmBoarding(id);
+            return ResponseEntity.ok().build();
+        }
+
+        // Endpoint to reject a pet boarding request
+        @PutMapping("/pet-boardings/reject/{id}")
+        public ResponseEntity<?> rejectBoarding(@PathVariable String id) {
+            petBoardingService.rejectBoarding(id);
+            return ResponseEntity.ok().build();
+        }
     }

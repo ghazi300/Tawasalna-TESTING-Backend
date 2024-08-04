@@ -4,6 +4,7 @@ import com.example.residentsupportservices.Entity.PetBoarding;
 import com.example.residentsupportservices.Repository.PetBoardingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -42,5 +43,23 @@ public class PetBoardingService implements IPetBoardingService {
     @Override
     public List<PetBoarding> getAllPetBoardings() {
         return petBoardingRepository.findAll();
+    }
+    @Override
+    @Transactional
+    public void confirmBoarding(String id) {
+        PetBoarding petBoarding = petBoardingRepository.findById(id)
+                .orElse(null);
+        petBoarding.setStatus("Confirmed");
+        petBoardingRepository.save(petBoarding);
+    }
+
+    @Override
+    // Method to reject a pet boarding request
+    @Transactional
+    public void rejectBoarding(String id) {
+        PetBoarding petBoarding = petBoardingRepository.findById(id)
+                .orElse(null);
+        petBoarding.setStatus("Rejected");
+        petBoardingRepository.save(petBoarding);
     }
 }

@@ -9,4 +9,6 @@ public interface IPetBoardingService {
     void deletePetBoarding(String id);
     PetBoarding getPetBoardingById(String id);
     List<PetBoarding> getAllPetBoardings();
+    void confirmBoarding(String id);
+    void rejectBoarding(String id);
 }
