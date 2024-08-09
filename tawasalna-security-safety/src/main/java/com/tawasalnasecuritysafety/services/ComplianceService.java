@@ -29,11 +29,23 @@ public class ComplianceService {
         Compliance compliance = (Compliance) complianceRepository.findById(id).orElseThrow(() -> new RuntimeException("Compliance not found"));
         compliance.setTitle(complianceDetails.getTitle());
         compliance.setStatus(complianceDetails.getStatus());
-        compliance.setDeadline(complianceDetails.getDeadline());
+        compliance.setDeadline(String.valueOf(complianceDetails.getDeadline()));
         return complianceRepository.save(compliance);
     }
 
     public void deleteCompliance(String id) {
         complianceRepository.deleteById(id);
+    }
+
+    public double getPendingCompliancePercentage() {
+        long totalCount = complianceRepository.count();
+        long pendingCount = complianceRepository.countByStatus("Non-compliant");
+        return totalCount == 0 ? 0 : ((double) pendingCount / totalCount) * 100;
+    }
+
+    public double getCompletedCompliancePercentage() {
+        long totalCount = complianceRepository.count();
+        long completedCount = complianceRepository.countByStatus("Compliant");
+        return totalCount == 0 ? 0 : ((double) completedCount / totalCount) * 100;
     }
 }

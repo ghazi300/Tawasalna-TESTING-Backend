@@ -11,4 +11,6 @@ public interface ComplianceRepository extends MongoRepository<Compliance, Long> 
     Optional<Compliance> findById(String id);
 
     void deleteById(String id);
+    long countByStatus(String status);
+
 }

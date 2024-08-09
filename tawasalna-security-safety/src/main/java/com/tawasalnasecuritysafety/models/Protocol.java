@@ -38,4 +38,10 @@ public class Protocol implements Serializable {
 
     @NotBlank(message = "Responsible person is mandatory")
     private String responsiblePerson;
+
+    public void setLastUpdateTime(String s) {
+    }
+
+    public void setLastUpdate(String date) {
+    }
 }

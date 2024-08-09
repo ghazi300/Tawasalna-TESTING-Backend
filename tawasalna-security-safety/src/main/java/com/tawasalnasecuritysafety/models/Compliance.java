@@ -30,4 +30,9 @@ public class Compliance {
     @OneToMany(mappedBy = "compliance", cascade = CascadeType.ALL)
     private List<ComplianceDocument> documents;
 
+    public void setComments(String testCompliance) {
+    }
+
+    public void setDeadline(String date) {
+    }
 }

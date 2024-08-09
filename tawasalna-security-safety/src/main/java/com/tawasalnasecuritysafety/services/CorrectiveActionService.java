@@ -28,7 +28,7 @@ public class CorrectiveActionService {
         CorrectiveAction correctiveAction = correctiveActionRepository.findById(id).orElseThrow(() -> new RuntimeException("Corrective Action not found"));
         correctiveAction.setDescription(correctiveActionDetails.getDescription());
         correctiveAction.setResponsibleParty(correctiveActionDetails.getResponsibleParty());
-        correctiveAction.setDeadline(correctiveActionDetails.getDeadline());
+        correctiveAction.setDeadline(String.valueOf(correctiveActionDetails.getDeadline()));
         correctiveAction.setStatus(correctiveActionDetails.getStatus());
         return correctiveActionRepository.save(correctiveAction);
     }

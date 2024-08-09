@@ -43,4 +43,13 @@ public class ComplianceController {
         complianceService.deleteCompliance(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/pending-percentage")
+    public double getPendingCompliancePercentage() {
+        return complianceService.getPendingCompliancePercentage();
+    }
+
+    @GetMapping("/completed-percentage")
+    public double getCompletedCompliancePercentage() {
+        return complianceService.getCompletedCompliancePercentage();
+    }
 }

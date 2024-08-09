@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -27,4 +30,24 @@ public class CorrectiveAction {
     private Date deadline;
     private String status; //  "Pending", "Completed"
 
+    public void setDeadline(String date) {
+        if (date != null && !date.isEmpty()) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                this.deadline = sdf.parse(date);
+            } catch (ParseException e) {
+                throw new RuntimeException("Failed to parse date: " + date, e);
+            }
+        }
+    }
+
+    // Directly set the description
+    public void setActionDescription(String description) {
+        this.description = description;
+    }
+
+    // Directly get the description
+    public String getActionDescription() {
+        return this.description;
+    }
 }
