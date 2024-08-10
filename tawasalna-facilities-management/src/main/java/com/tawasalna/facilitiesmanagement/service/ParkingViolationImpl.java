@@ -53,4 +53,6 @@ public class ParkingViolationImpl  implements IParkingViolation{
   /*  private float calculateFineAmount(ParkingAllocation allocation) {
         return 50.0f;
     }*/
+
+
 }
