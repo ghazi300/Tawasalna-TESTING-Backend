@@ -26,6 +26,16 @@ public class AsignedTask {
     private TaskStatus taskStatus;
     private Date dateDebut;
     private Date dateFin;
-    private String equipement;
+    private List<Equipment> equipements; // Updated to use Equipment class
 
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class Equipment {
+        private String equipmentId;
+        private String equipmentName;
+        private int quantity;
+    }
 }

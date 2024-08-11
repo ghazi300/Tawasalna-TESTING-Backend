@@ -1,7 +1,10 @@
 package com.tawasalna.MaintenanceAgent.controllers;
 
 import com.tawasalna.MaintenanceAgent.models.AsignedTask;
+import com.tawasalna.MaintenanceAgent.models.MaintenanceTask;
+import com.tawasalna.MaintenanceAgent.models.TaskStatus;
 import com.tawasalna.MaintenanceAgent.repos.AsignedTaskRepository;
+import com.tawasalna.MaintenanceAgent.repos.MaintenanceTaskRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,6 +21,7 @@ import java.util.Optional;
 public class AsignedTaskController {
 
     private final AsignedTaskRepository asignedTaskRepository;
+    private final MaintenanceTaskRepository maintenanceTaskRepository;
 
     @GetMapping("/")
     public ResponseEntity<List<AsignedTask>> getAllAssignedTasks() {
@@ -37,6 +41,31 @@ public class AsignedTaskController {
         return assignedTask.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<AsignedTask> updateAssignedTask(@PathVariable String id, @RequestBody AsignedTask assignedTask) {
+        if (!asignedTaskRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        assignedTask.setId(id);
+
+        AsignedTask updatedTask = asignedTaskRepository.save(assignedTask);
+
+        // Vérifiez le statut de la tâche et mettez à jour MaintenanceTask si nécessaire
+        if (assignedTask.getTaskStatus() == TaskStatus.COMPLETED) {
+            // Met à jour le statut de MaintenanceTask directement
+            updateMaintenanceTaskStatus(id, TaskStatus.COMPLETED);
+        }
+
+        return ResponseEntity.ok().body(updatedTask);
+    }
+
+    private void updateMaintenanceTaskStatus(String assignedTaskId, TaskStatus newStatus) {
+        MaintenanceTask task = maintenanceTaskRepository.findByAssignedTaskId(assignedTaskId);
+        if (task != null) {
+            task.setTaskStatus(newStatus);
+            maintenanceTaskRepository.save(task);
+        }
+    }
 
 
     @DeleteMapping("/{id}")
@@ -48,5 +77,11 @@ public class AsignedTaskController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+    @DeleteMapping("/")
+    public ResponseEntity<Void> deleteAssignedTask() {
+        asignedTaskRepository.deleteAll();
+        return ResponseEntity.noContent().build();
+
     }
 }

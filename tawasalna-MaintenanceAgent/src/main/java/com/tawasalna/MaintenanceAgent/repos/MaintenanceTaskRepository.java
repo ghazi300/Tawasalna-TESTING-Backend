@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 
 public interface MaintenanceTaskRepository extends MongoRepository<MaintenanceTask,String> {
+    MaintenanceTask findByAssignedTaskId(String assignedTaskId);
 
 
 }
