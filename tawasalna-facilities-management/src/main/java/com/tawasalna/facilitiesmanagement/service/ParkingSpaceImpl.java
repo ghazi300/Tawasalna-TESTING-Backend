@@ -37,7 +37,7 @@ public class ParkingSpaceImpl  implements IParkingSpace   {
         }
 
         ParkingLot parkingLot = parkingLotRepository.findById(parkingSpace.getParkingLotId().getParkinglotid())
-                .orElseThrow(() -> new IllegalArgumentException("ParkingLot with id " + parkingSpace.getParkingLotId().getParkinglotid() + " not found"));
+                .orElseThrow(() -> new IllegalArgumentException("ParkingLot with id  not found"));
 
         parkingSpace.setParkingLotId(parkingLot);
 
@@ -98,13 +98,10 @@ public class ParkingSpaceImpl  implements IParkingSpace   {
             ParkingSpace existingParkingSpace = parkingSpaceRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("ParkingSpace with id " + id + " not found"));
 
-            System.out.println("****************");
-            System.out.println(existingParkingSpace);
-            System.out.println("****************");
+
 
             List<ParkingSubSpace> subSpaces = parkingSubSpaceRepository.findByParkingSpaceref(existingParkingSpace.getParkingSpaceId());
-            System.out.println(subSpaces);
-            System.out.println("****************");
+
 
             if (subSpaces != null && !subSpaces.isEmpty()) {
                 for (ParkingSubSpace subSpace : subSpaces) {

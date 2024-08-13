@@ -28,7 +28,7 @@ public class ParkingAllocationController {
             return new ResponseEntity<>(iParkingAllocation.add(parkingAllocation), HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace(); // This will print the stack trace to the logs
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @GetMapping("getparkingAllocations")
@@ -36,7 +36,7 @@ public class ParkingAllocationController {
         try {
             return new ResponseEntity<>(iParkingAllocation.getParkingAllocations(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -81,7 +81,7 @@ public class ParkingAllocationController {
         try {
             return new ResponseEntity<>(iParkingAllocation.getViolationParking(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @GetMapping("activeVehicleCount")
@@ -89,7 +89,7 @@ public class ParkingAllocationController {
         try {
             return new ResponseEntity<>(iParkingAllocation.calculateTotalActiveVehicles(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @GetMapping("/advanced-statistics")

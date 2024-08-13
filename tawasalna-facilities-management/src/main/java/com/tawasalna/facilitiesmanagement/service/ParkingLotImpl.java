@@ -39,7 +39,7 @@ public class ParkingLotImpl implements  IParkingLot{
 
             return parkingLotRepository.save(parkingLot1Update);
         } else {
-            throw new RuntimeException("Record not found ");
+             throw new RuntimeException("Record not found ");
         }
     }
 

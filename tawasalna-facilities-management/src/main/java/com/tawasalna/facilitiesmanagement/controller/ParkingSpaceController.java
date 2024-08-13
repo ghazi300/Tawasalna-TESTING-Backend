@@ -22,7 +22,7 @@ public class ParkingSpaceController {
             return new ResponseEntity<>(iParkingSpace.addParkingSpace(parkingSpace), HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @GetMapping("getparkingspace")
@@ -30,23 +30,16 @@ public class ParkingSpaceController {
         try {
             return new ResponseEntity<>(iParkingSpace.getParkingSpaces(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-  /*  @GetMapping("getparkingspacesub/{id}")
-    public ResponseEntity<List<ParkingSubSpace>> getPark( @PathVariable String id) {
-        try {
-            return new ResponseEntity<>(iParkingSpace.getParkingSubbyid(id), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }*/
+
     @GetMapping("getparkingSubspace")
     public ResponseEntity<List<ParkingSubSpace>> getParkingsubspace() {
         try {
             return new ResponseEntity<>(iParkingSpace.getParkingSubSpaces(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @GetMapping("/{id}")

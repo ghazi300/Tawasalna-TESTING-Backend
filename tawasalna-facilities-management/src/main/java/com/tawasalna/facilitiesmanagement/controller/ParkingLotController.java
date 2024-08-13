@@ -21,7 +21,7 @@ public class ParkingLotController {
         try{
             return new ResponseEntity<>(iParkingLot.add(parkingLot), HttpStatus.CREATED);
         }catch(Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @GetMapping("getparkinglots")
@@ -29,7 +29,7 @@ public class ParkingLotController {
         try {
             return new ResponseEntity<>(iParkingLot.getParkingLot(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @GetMapping("/{id}")
@@ -70,7 +70,7 @@ public class ParkingLotController {
         try {
             return new ResponseEntity<>(iParkingLot.getDistinctLocationCount(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
