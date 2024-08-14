@@ -22,6 +22,7 @@ public class EquipmentController {
         return equipment.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
     @GetMapping
     public ResponseEntity<List<Equipment>> getAllEquipments() {
         List<Equipment> equipments = equipmentRepository.findAll();
