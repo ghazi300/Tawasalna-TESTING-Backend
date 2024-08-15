@@ -44,6 +44,7 @@ public class ParkingAllocationController {
 
     @PutMapping("updateendtime")
     public ResponseEntity<ParkingAllocation> updateEndTime( @RequestBody ParkingAllocation p) {
+
         try {
             return ResponseEntity.ok(iParkingAllocation.updateEndTime(p));
         } catch (RuntimeException e) {

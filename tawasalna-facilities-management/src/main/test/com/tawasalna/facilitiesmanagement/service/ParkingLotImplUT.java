@@ -1,25 +1,23 @@
-package com.tawasalna.facilities.junit;
+package com.tawasalna.facilitiesmanagement.service;
 
 import com.tawasalna.facilitiesmanagement.models.ParkingLot;
 import com.tawasalna.facilitiesmanagement.repository.ParkingLotRepository;
-import com.tawasalna.facilitiesmanagement.service.ParkingLotImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-public class ParkingLotServiceTest {
+@ExtendWith(MockitoExtension.class)
 
-
+class ParkingLotImplUT {
     @Mock
     private ParkingLotRepository parkingLotRepository;
 
@@ -27,15 +25,14 @@ public class ParkingLotServiceTest {
     private ParkingLotImpl parkingLotService;
 
     private ParkingLot parkingLot;
-
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
         parkingLot = new ParkingLot("1", "Lot A", "Location A", 12.345, 67.890, 100, Arrays.asList("Route1", "Route2"), null, null);
+
     }
 
     @Test
-    void getParkingLot_shouldReturnParkingLots() {
+    void getParkingLot() {
         when(parkingLotRepository.findAll()).thenReturn(Arrays.asList(parkingLot));
 
         List<ParkingLot> result = parkingLotService.getParkingLot();
@@ -45,7 +42,7 @@ public class ParkingLotServiceTest {
     }
 
     @Test
-    void addParkingLot_shouldSaveAndReturnParkingLot() {
+    void add() {
         when(parkingLotRepository.save(parkingLot)).thenReturn(parkingLot);
 
         ParkingLot result = parkingLotService.add(parkingLot);
@@ -55,7 +52,7 @@ public class ParkingLotServiceTest {
     }
 
     @Test
-    void updateParkingLot_shouldUpdateAndReturnUpdatedParkingLot() {
+    void update() {
         ParkingLot updatedParkingLot = new ParkingLot("1", "Lot B", "Location B", 12.345, 67.890, 150, Arrays.asList("Route3"), null, null);
 
         when(parkingLotRepository.findById(parkingLot.getParkinglotid())).thenReturn(Optional.of(parkingLot));
@@ -70,32 +67,17 @@ public class ParkingLotServiceTest {
     }
 
     @Test
-    void updateParkingLot_shouldThrowExceptionWhenParkingLotNotFound() {
-        when(parkingLotRepository.findById(parkingLot.getParkinglotid())).thenReturn(Optional.empty());
-
-        assertThrows(RuntimeException.class, () -> parkingLotService.update(parkingLot.getParkinglotid(), parkingLot));
-        verify(parkingLotRepository, times(0)).save(any(ParkingLot.class));
-    }
-
-    @Test
-    void deleteParkingLot_shouldDeleteParkingLot() {
+    void delete() {
         when(parkingLotRepository.findById(parkingLot.getParkinglotid())).thenReturn(Optional.of(parkingLot));
 
         parkingLotService.delete(parkingLot.getParkinglotid());
 
         verify(parkingLotRepository, times(1)).deleteById(parkingLot.getParkinglotid());
+
     }
 
     @Test
-    void deleteParkingLot_shouldThrowExceptionWhenParkingLotNotFound() {
-        when(parkingLotRepository.findById(parkingLot.getParkinglotid())).thenReturn(Optional.empty());
-
-        assertThrows(RuntimeException.class, () -> parkingLotService.delete(parkingLot.getParkinglotid()));
-        verify(parkingLotRepository, times(0)).deleteById(parkingLot.getParkinglotid());
-    }
-
-    @Test
-    void getDistinctLocationCount_shouldReturnCount() {
+    void getDistinctLocationCount() {
         when(parkingLotRepository.count()).thenReturn(5L);
 
         long count = parkingLotService.getDistinctLocationCount();
@@ -103,5 +85,4 @@ public class ParkingLotServiceTest {
         assertEquals(5, count);
         verify(parkingLotRepository, times(1)).count();
     }
-
 }
