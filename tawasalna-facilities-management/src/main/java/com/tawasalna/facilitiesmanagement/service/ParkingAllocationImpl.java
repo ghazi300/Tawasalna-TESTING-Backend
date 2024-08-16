@@ -185,6 +185,7 @@ public class ParkingAllocationImpl implements IParkingAllocation{
         return  parkingAllocationRepository.countByStatus(ParkingAllocationStatus.ACTIVE);
 
     }
+
     public Map<String, Object> calculateAdvancedTrafficStatistics(LocalDateTime startTime, LocalDateTime endTime) {
         List<ParkingAllocation> allocations = parkingAllocationRepository.findAllByStartTimeBetweenAndEndTimeBetween(startTime, endTime, startTime, endTime);
         Map<String, Long> entriesPerHour = allocations.stream()
