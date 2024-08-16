@@ -1,6 +1,6 @@
 package com.example.tawasalnaoperations.entities;
 
-public enum RecyclingType {
+public enum MaterialType {
     PAPER,
     PLASTIC,
     METAL,

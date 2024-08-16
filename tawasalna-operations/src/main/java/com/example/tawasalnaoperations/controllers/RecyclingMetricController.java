@@ -1,5 +1,6 @@
 package com.example.tawasalnaoperations.controllers;
 
+import com.example.tawasalnaoperations.entities.MaterialType;
 import com.example.tawasalnaoperations.entities.RecyclingMetric;
 import com.example.tawasalnaoperations.services.RecyclingMetricService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -26,9 +28,15 @@ public class RecyclingMetricController {
 
     // Read all
     @GetMapping
-    public List<RecyclingMetric> getAllRecyclingMetrics() {
-        return recyclingMetricService.getAllRecyclingMetrics();
+    public List<RecyclingMetric> getAllMetrics() {
+        return recyclingMetricService.getAllMetrics();
     }
+
+    @GetMapping("/statistics")
+    public Map<MaterialType, Long> getRecyclingStatistics() {
+        return recyclingMetricService.getRecyclingStatistics();
+    }
+
 
     // Read by ID
     @GetMapping("/{metricId}")

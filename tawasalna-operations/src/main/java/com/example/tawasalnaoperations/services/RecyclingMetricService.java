@@ -1,13 +1,16 @@
 package com.example.tawasalnaoperations.services;
 
 
+import com.example.tawasalnaoperations.entities.MaterialType;
 import com.example.tawasalnaoperations.entities.RecyclingMetric;
 import com.example.tawasalnaoperations.repositories.RecyclingMetricRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RecyclingMetricService {
@@ -21,10 +24,16 @@ public class RecyclingMetricService {
     }
 
     // Read
-    public List<RecyclingMetric> getAllRecyclingMetrics() {
+    public List<RecyclingMetric> getAllMetrics() {
         return recyclingMetricRepository.findAll();
     }
 
+    public Map<MaterialType, Long> getRecyclingStatistics() {
+        List<RecyclingMetric> metrics = recyclingMetricRepository.findAll();
+
+        return metrics.stream()
+                .collect(Collectors.groupingBy(RecyclingMetric::getType, Collectors.summingLong(metric -> Long.parseLong(metric.getQuantity()))));
+    }
     public Optional<RecyclingMetric> getRecyclingMetricById(String metricId) {
         return recyclingMetricRepository.findById(metricId);
     }
