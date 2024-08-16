@@ -38,7 +38,7 @@ public class EnergySourceService {
         INCREMENT_MAP.put(ComponentType.OTHER, 5.0);
     }
 
-    @Scheduled(fixedRate = 6000000) // 600,000 ms = 10 minutes
+    @Scheduled(fixedRate = 600000) // 600,000 ms = 10 minutes
     public void updateEnergySources() {
         List<EnergySource> sources = energySourceRepository.findAll();
         double totalEnergyProduced = 0;

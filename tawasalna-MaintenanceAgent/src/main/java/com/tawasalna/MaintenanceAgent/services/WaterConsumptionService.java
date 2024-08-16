@@ -46,7 +46,7 @@ public class WaterConsumptionService {
         INCREMENT_MAP.put(WaterConsumptionType.OTHER, 10.0);
     }
 
-    @Scheduled(fixedRate = 60000) // 60,000 ms = 1 minute
+    @Scheduled(fixedRate = 6000000) // 60,000 ms = 1 minute
     public void updateAmounts() {
         List<WaterConsumption> consumptions = waterConsumptionRepository.findAll();
         double totalAmount = 0;

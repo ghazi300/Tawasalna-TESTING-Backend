@@ -1,5 +1,6 @@
-package com.tawasalna.MaintenanceAgent.controllers;
+package com.tawasalna.MaintenanceAgent;
 
+import com.tawasalna.MaintenanceAgent.controllers.EquipmentController;
 import com.tawasalna.MaintenanceAgent.models.Equipment;
 import com.tawasalna.MaintenanceAgent.repos.EquipmentRepository;
 import org.junit.jupiter.api.BeforeEach;
