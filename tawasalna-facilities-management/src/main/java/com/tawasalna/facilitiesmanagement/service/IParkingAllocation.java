@@ -1,6 +1,7 @@
 package com.tawasalna.facilitiesmanagement.service;
 
 import com.tawasalna.facilitiesmanagement.models.ParkingAllocation;
+import com.tawasalna.facilitiesmanagement.models.ParkingLot;
 import com.tawasalna.facilitiesmanagement.models.ParkingSubSpace;
 
 import java.util.List;
@@ -19,10 +20,5 @@ public interface IParkingAllocation {
     List<ParkingAllocation> getViolationParking();
 
     Long calculateTotalActiveVehicles();
-   // Map<String, Object> calculateAdvancedTrafficStatistics(LocalDateTime startTime, LocalDateTime endTime);
-
-   // Map<LocalDateTime, Integer> analyzeEntries(String parkingLotId);
-   // long countAllocationsByParkingLotId(String parkingLotId);
-    long countVehiclesEnteredDuringRange(String parkingLotId);
-
+     boolean verify(ParkingLot parkingLot);
 }

@@ -90,25 +90,13 @@ public class ParkingAllocationController {
             return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-   /* @GetMapping("/advanced-statistics")
-    public Map<String, Object> getAdvancedTrafficStatistics(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime) {
-        return iParkingAllocation.calculateAdvancedTrafficStatistics(startTime, endTime);
+    @GetMapping("getaa")
+    public ResponseEntity<Boolean> getaa() {
+        try {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-    @GetMapping("/entries/{parkingLotId}")
-    public Map<LocalDateTime, Integer> getEntriesAnalysis(@PathVariable String parkingLotId) {
-        return iParkingAllocation.analyzeEntries(parkingLotId);
-    }*/
-    /*@GetMapping("/allocations/count/{parkingLotId}")
-    public ResponseEntity<Long> getAllocationCount(@PathVariable String parkingLotId) {
-        long count = iParkingAllocation.countAllocationsByParkingLotId(parkingLotId);
-        return ResponseEntity.ok(count);
-    }
-*/
-   @GetMapping("/allocations/count/{parkingLotId}")
-   public ResponseEntity<Long> getAllocationCount(@PathVariable String parkingLotId) {
-       long count = iParkingAllocation.countVehiclesEnteredDuringRange(parkingLotId);
-       return ResponseEntity.ok(count);
-   }
+
 }
