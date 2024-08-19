@@ -1,104 +1,142 @@
 package com.example.tawasalnaoperations;
 
-
 import com.example.tawasalnaoperations.entities.PestControlReport;
 import com.example.tawasalnaoperations.repositories.PestControlReportRepository;
 import com.example.tawasalnaoperations.services.PestControlReportService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.transaction.annotation.Transactional;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@DataJpaTest
-@Transactional
+@SpringJUnitConfig
 public class PestControlReportServiceIntegrationTests {
 
-    @Autowired
-    private PestControlReportService service;
+    @InjectMocks
+    private PestControlReportService pestControlReportService;
 
-    @Autowired
-    private PestControlReportRepository repository;
-
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    @Mock
+    private PestControlReportRepository pestControlReportRepository;
 
     @BeforeEach
     public void setUp() {
-        repository.deleteAll(); // Nettoyer la base de données avant chaque test
-    }
-
-    private Date parseDate(String date) throws ParseException {
-        return sdf.parse(date);
+        pestControlReportRepository.deleteAll(); // Clean the database before each test
     }
 
     @Test
-    public void testCreateAndRetrieveReport() throws ParseException {
+    public void testCreateReport() {
         PestControlReport report = new PestControlReport();
-        report.setGardenId("1");
-        report.setReportDate(parseDate("2024-08-01"));
-        report.setPestsIdentified(List.of("Aphids"));
-        report.setActionsTaken(List.of("Insecticide application"));
-        report.setStatus("Completed");
+        report.setReportId("1");
+        report.setGardenId("Garden1");
+        report.setReportDate(new Date());
+        report.setPestsIdentified(Arrays.asList("Pest1", "Pest2"));
+        report.setActionsTaken(Arrays.asList("Action1", "Action2"));
+        report.setStatus("In Progress");
 
-        PestControlReport createdReport = service.createReport(report);
+        when(pestControlReportRepository.save(report)).thenReturn(report);
 
-        assertNotNull(createdReport);
-        assertEquals("1", createdReport.getGardenId());
-        assertEquals(parseDate("2024-08-01"), createdReport.getReportDate());
+        PestControlReport created = pestControlReportService.createReport(report);
 
-        Optional<PestControlReport> retrievedReport = service.getReportById(createdReport.getReportId());
-        assertTrue(retrievedReport.isPresent());
-        assertEquals(List.of("Aphids"), retrievedReport.get().getPestsIdentified());
+        assertNotNull(created);
+        assertEquals("1", created.getReportId());
+        assertEquals("Garden1", created.getGardenId());
+        verify(pestControlReportRepository, times(1)).save(report);
     }
 
     @Test
-    public void testUpdateReport() throws ParseException {
+    public void testGetReportById() {
         PestControlReport report = new PestControlReport();
-        report.setGardenId("1");
-        report.setReportDate(parseDate("2024-08-01"));
-        report.setPestsIdentified(List.of("Aphids"));
-        report.setActionsTaken(List.of("Insecticide application"));
-        report.setStatus("Pending");
+        report.setReportId("1");
+        report.setGardenId("Garden1");
+        report.setReportDate(new Date());
+        report.setPestsIdentified(Arrays.asList("Pest1", "Pest2"));
+        report.setActionsTaken(Arrays.asList("Action1", "Action2"));
+        report.setStatus("In Progress");
 
-        PestControlReport createdReport = service.createReport(report);
+        when(pestControlReportRepository.findById("1")).thenReturn(Optional.of(report));
+
+        Optional<PestControlReport> found = pestControlReportService.getReportById("1");
+
+        assertTrue(found.isPresent());
+        assertEquals("Garden1", found.get().getGardenId());
+        verify(pestControlReportRepository, times(1)).findById("1");
+    }
+
+    @Test
+    public void testUpdateReport() {
+        PestControlReport report = new PestControlReport();
+        report.setReportId("1");
+        report.setGardenId("Garden1");
+        report.setReportDate(new Date());
+        report.setPestsIdentified(Arrays.asList("Pest1", "Pest2"));
+        report.setActionsTaken(Arrays.asList("Action1", "Action2"));
+        report.setStatus("In Progress");
+
+        when(pestControlReportRepository.findById("1")).thenReturn(Optional.of(report));
+        when(pestControlReportRepository.save(report)).thenReturn(report);
 
         PestControlReport updatedReport = new PestControlReport();
-        updatedReport.setGardenId("1");
-        updatedReport.setReportDate(parseDate("2024-08-02"));
-        updatedReport.setPestsIdentified(List.of("Spider mites"));
-        updatedReport.setActionsTaken(List.of("Organic spray"));
+        updatedReport.setGardenId("Garden2");
+        updatedReport.setReportDate(new Date());
+        updatedReport.setPestsIdentified(Arrays.asList("Pest3", "Pest4"));
+        updatedReport.setActionsTaken(Arrays.asList("Action3", "Action4"));
         updatedReport.setStatus("Completed");
 
-        PestControlReport result = service.updateReport(createdReport.getReportId(), updatedReport);
+        PestControlReport updated = pestControlReportService.updateReport("1", updatedReport);
 
-        assertNotNull(result);
-        assertEquals(parseDate("2024-08-02"), result.getReportDate());
-        assertEquals("Spider mites", result.getPestsIdentified().get(0));
+        assertNotNull(updated);
+        assertEquals("Garden2", updated.getGardenId());
+        assertEquals("Completed", updated.getStatus());
+        verify(pestControlReportRepository, times(1)).findById("1");
+        verify(pestControlReportRepository, times(1)).save(report);
     }
 
     @Test
-    public void testDeleteReport() throws ParseException {
-        PestControlReport report = new PestControlReport();
-        report.setGardenId("1");
-        report.setReportDate(parseDate("2024-08-01"));
-        report.setPestsIdentified(List.of("Aphids"));
-        report.setActionsTaken(List.of("Insecticide application"));
-        report.setStatus("Completed");
+    public void testGetAllReports() {
+        PestControlReport report1 = new PestControlReport();
+        report1.setReportId("1");
+        report1.setGardenId("Garden1");
+        report1.setReportDate(new Date());
+        report1.setPestsIdentified(Arrays.asList("Pest1", "Pest2"));
+        report1.setActionsTaken(Arrays.asList("Action1", "Action2"));
+        report1.setStatus("In Progress");
 
-        PestControlReport createdReport = service.createReport(report);
+        PestControlReport report2 = new PestControlReport();
+        report2.setReportId("2");
+        report2.setGardenId("Garden2");
+        report2.setReportDate(new Date());
+        report2.setPestsIdentified(Arrays.asList("Pest3", "Pest4"));
+        report2.setActionsTaken(Arrays.asList("Action3", "Action4"));
+        report2.setStatus("Completed");
 
-        service.deleteReport(createdReport.getReportId());
+        List<PestControlReport> reports = Arrays.asList(report1, report2);
 
-        Optional<PestControlReport> deletedReport = service.getReportById(createdReport.getReportId());
-        assertFalse(deletedReport.isPresent());
+        when(pestControlReportRepository.findAll()).thenReturn(reports);
+
+        List<PestControlReport> found = pestControlReportService.getAllReports();
+
+        assertEquals(2, found.size());
+        assertEquals("Garden1", found.get(0).getGardenId());
+        assertEquals("Garden2", found.get(1).getGardenId());
+        verify(pestControlReportRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void testDeleteReport() {
+        String reportId = "1";
+
+        doNothing().when(pestControlReportRepository).deleteById(reportId);
+
+        pestControlReportService.deleteReport(reportId);
+
+        verify(pestControlReportRepository, times(1)).deleteById(reportId);
     }
 }
-

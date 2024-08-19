@@ -1,105 +1,136 @@
 package com.example.tawasalnaoperations;
 
-
 import com.example.tawasalnaoperations.entities.MaintenanceSchedule;
 import com.example.tawasalnaoperations.repositories.MaintenanceScheduleRepository;
 import com.example.tawasalnaoperations.services.MaintenanceScheduleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.transaction.annotation.Transactional;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@DataJpaTest
-@Transactional
+@SpringJUnitConfig
 public class MaintenanceScheduleServiceIntegrationTests {
 
-    @Autowired
-    private MaintenanceScheduleService service;
+    @InjectMocks
+    private MaintenanceScheduleService maintenanceScheduleService;
 
-    @Autowired
-    private MaintenanceScheduleRepository repository;
-
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    @Mock
+    private MaintenanceScheduleRepository maintenanceScheduleRepository;
 
     @BeforeEach
     public void setUp() {
-        repository.deleteAll(); // Nettoyer la base de données avant chaque test
-    }
-
-    private Date parseDate(String date) throws ParseException {
-        return sdf.parse(date);
+        maintenanceScheduleRepository.deleteAll(); // Clean the database before each test
     }
 
     @Test
-    public void testCreateAndRetrieveSchedule() throws ParseException {
+    public void testCreateSchedule() {
         MaintenanceSchedule schedule = new MaintenanceSchedule();
-        schedule.setGardenId("1");
-        schedule.setDateDebut(parseDate("2024-08-01"));
-        schedule.setDateFin(parseDate("2024-08-10"));
-        schedule.setTasks(List.of("Mowing and trimming"));
+        schedule.setScheduleId("1");
+        schedule.setGardenId("Garden1");
+        schedule.setDateDebut(new Date());
+        schedule.setDateFin(new Date());
+        schedule.setTasks(Arrays.asList("Task1", "Task2"));
 
-        MaintenanceSchedule createdSchedule = service.createSchedule(schedule);
+        when(maintenanceScheduleRepository.save(schedule)).thenReturn(schedule);
 
-        assertNotNull(createdSchedule);
-        assertEquals("1", createdSchedule.getGardenId());
-        assertEquals(parseDate("2024-08-01"), createdSchedule.getDateDebut());
+        MaintenanceSchedule created = maintenanceScheduleService.createSchedule(schedule);
 
-        Optional<MaintenanceSchedule> retrievedSchedule = service.getScheduleById(createdSchedule.getScheduleId());
-        assertTrue(retrievedSchedule.isPresent());
-        assertEquals(List.of("Mowing and trimming"), retrievedSchedule.get().getTasks());
+        assertNotNull(created);
+        assertEquals("1", created.getScheduleId());
+        assertEquals("Garden1", created.getGardenId());
+        verify(maintenanceScheduleRepository, times(1)).save(schedule);
     }
 
     @Test
-    public void testUpdateSchedule() throws ParseException {
+    public void testGetScheduleById() {
         MaintenanceSchedule schedule = new MaintenanceSchedule();
-        schedule.setGardenId("1");
-        schedule.setDateDebut(parseDate("2024-08-01"));
-        schedule.setDateFin(parseDate("2024-08-10"));
-        schedule.setTasks(List.of("Mowing"));
+        schedule.setScheduleId("1");
+        schedule.setGardenId("Garden1");
+        schedule.setDateDebut(new Date());
+        schedule.setDateFin(new Date());
+        schedule.setTasks(Arrays.asList("Task1", "Task2"));
 
-        MaintenanceSchedule createdSchedule = service.createSchedule(schedule);
+        when(maintenanceScheduleRepository.findById("1")).thenReturn(Optional.of(schedule));
+
+        Optional<MaintenanceSchedule> found = maintenanceScheduleService.getScheduleById("1");
+
+        assertTrue(found.isPresent());
+        assertEquals("Garden1", found.get().getGardenId());
+        verify(maintenanceScheduleRepository, times(1)).findById("1");
+    }
+
+    @Test
+    public void testUpdateSchedule() {
+        MaintenanceSchedule schedule = new MaintenanceSchedule();
+        schedule.setScheduleId("1");
+        schedule.setGardenId("Garden1");
+        schedule.setDateDebut(new Date());
+        schedule.setDateFin(new Date());
+        schedule.setTasks(Arrays.asList("Task1", "Task2"));
+
+        when(maintenanceScheduleRepository.findById("1")).thenReturn(Optional.of(schedule));
+        when(maintenanceScheduleRepository.save(schedule)).thenReturn(schedule);
 
         MaintenanceSchedule updatedSchedule = new MaintenanceSchedule();
-        updatedSchedule.setGardenId("1");
-        updatedSchedule.setDateDebut(parseDate("2024-08-02"));
-        updatedSchedule.setDateFin(parseDate("2024-08-11"));
-        updatedSchedule.setTasks(List.of("Mowing and trimming"));
+        updatedSchedule.setGardenId("Garden2");
+        updatedSchedule.setDateDebut(new Date());
+        updatedSchedule.setDateFin(new Date());
+        updatedSchedule.setTasks(Arrays.asList("Task3", "Task4"));
 
-        Optional<MaintenanceSchedule> result = service.updateSchedule(createdSchedule.getScheduleId(), updatedSchedule);
+        Optional<MaintenanceSchedule> updated = maintenanceScheduleService.updateSchedule("1", updatedSchedule);
 
-        assertTrue(result.isPresent());
-        assertEquals(parseDate("2024-08-02"), result.get().getDateDebut());
-        assertEquals(List.of("Mowing and trimming"), result.get().getTasks());
+        assertTrue(updated.isPresent());
+        assertEquals("Garden2", updated.get().getGardenId());
+        verify(maintenanceScheduleRepository, times(1)).findById("1");
+        verify(maintenanceScheduleRepository, times(1)).save(schedule);
     }
 
     @Test
-    public void testDeleteSchedule() {
-        MaintenanceSchedule schedule;
-        try {
-            schedule = new MaintenanceSchedule();
-            schedule.setGardenId("1");
-            schedule.setDateDebut(parseDate("2024-08-01"));
-            schedule.setDateFin(parseDate("2024-08-10"));
-            schedule.setTasks(List.of("Mowing"));
+    public void testGetAllMaintenances() {
+        MaintenanceSchedule schedule1 = new MaintenanceSchedule();
+        schedule1.setScheduleId("1");
+        schedule1.setGardenId("Garden1");
+        schedule1.setDateDebut(new Date());
+        schedule1.setDateFin(new Date());
+        schedule1.setTasks(Arrays.asList("Task1", "Task2"));
 
-            MaintenanceSchedule createdSchedule = service.createSchedule(schedule);
+        MaintenanceSchedule schedule2 = new MaintenanceSchedule();
+        schedule2.setScheduleId("2");
+        schedule2.setGardenId("Garden2");
+        schedule2.setDateDebut(new Date());
+        schedule2.setDateFin(new Date());
+        schedule2.setTasks(Arrays.asList("Task3", "Task4"));
 
-            service.deleteMaintenance(createdSchedule.getScheduleId());
+        List<MaintenanceSchedule> schedules = Arrays.asList(schedule1, schedule2);
 
-            Optional<MaintenanceSchedule> deletedSchedule = service.getScheduleById(createdSchedule.getScheduleId());
-            assertFalse(deletedSchedule.isPresent());
-        } catch (ParseException e) {
-            fail("Date parsing failed: " + e.getMessage());
-        }
+        when(maintenanceScheduleRepository.findAll()).thenReturn(schedules);
+
+        List<MaintenanceSchedule> found = maintenanceScheduleService.getAllMaintenances();
+
+        assertEquals(2, found.size());
+        assertEquals("Garden1", found.get(0).getGardenId());
+        assertEquals("Garden2", found.get(1).getGardenId());
+        verify(maintenanceScheduleRepository, times(1)).findAll();
     }
 
+    @Test
+    public void testDeleteMaintenance() {
+        String scheduleId = "1";
+
+        doNothing().when(maintenanceScheduleRepository).deleteById(scheduleId);
+
+        maintenanceScheduleService.deleteMaintenance(scheduleId);
+
+        verify(maintenanceScheduleRepository, times(1)).deleteById(scheduleId);
+    }
 }

@@ -133,3 +133,7 @@ etawasalna-operations/src/test/java/com/example/tawasalnaoperations/CleaningSupp
 btawasalna-operations/src/main/java/com/example/tawasalnaoperations/entities/HazardousWasteLog.java,4\1\41f17593841f51091069d6ca00ed8c0a95ef18d7
  
 ptawasalna-operations/src/main/java/com/example/tawasalnaoperations/repositories/HazardousWasteLogRepository.java,b\8\b8dea2d1b538c1f3cbbcee895ec7b5aa94b3b668
+Ÿ
+otawasalna-operations/src/main/java/com/example/tawasalnaoperations/controllers/HazardousWasteLogController.java,5\b\5bc753cc591865ffb01a37a3cb4e8d8b99895fd4
+™
+itawasalna-operations/src/main/java/com/example/tawasalnaoperations/services/HazardousWasteLogService.java,f\b\fba3449d2e7c7e51d578bdc074be9a4cbbd18700
