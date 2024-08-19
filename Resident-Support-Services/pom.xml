@@ -38,6 +38,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>com.ipactconsult</groupId>
             <artifactId>shared</artifactId>
             <version>0.0.2-SNAPSHOT</version>
@@ -51,6 +56,8 @@
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version>
         </dependency>
+
+
     </dependencies>
     <build>
         <plugins>

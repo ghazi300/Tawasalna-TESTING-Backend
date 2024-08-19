@@ -1,8 +1,10 @@
     package com.example.residentsupportservices.controllers;
 
+    import com.example.residentsupportservices.Entity.ChildcareProgram;
     import com.example.residentsupportservices.Entity.Pet;
     import com.example.residentsupportservices.Entity.PetBoarding;
     import com.example.residentsupportservices.Entity.Vaccination;
+    import com.example.residentsupportservices.Services.IChildcareProgramService;
     import com.example.residentsupportservices.Services.IPetBoardingService;
     import com.example.residentsupportservices.Services.IPetService;
     import com.example.residentsupportservices.Services.IVaccinationService;
@@ -32,6 +34,7 @@
         private IAttendanceService attendanceService;
         private IPetService petService;
         private IVaccinationService vaccinationService;
+        private IChildcareProgramService childcareProgramService;
 
         private IPetBoardingService petBoardingService;
 
@@ -62,136 +65,108 @@
             eventService.deleteEvent(eventId);
         }
 
-    // Endpoints pour l'entité Participant
+        // Endpoints pour l'entité Participant
 
-    @GetMapping("/participants")
-    public List<Participant> getAllParticipants() {
-        return participantService.getAllParticipants();
-    }
-
-    @GetMapping("/participants/{participantId}")
-    public Participant getParticipantById(@PathVariable String participantId) {
-        return participantService.getParticipantById(participantId);
-    }
-
-    @PostMapping("/participants")
-    public Participant createParticipant(@RequestBody Participant participant) {
-        return participantService.createParticipant(participant);
-    }
-
-    @PutMapping("/participants/{participantId}")
-    public Participant updateParticipant(@PathVariable String participantId, @RequestBody Participant participant) {
-        return participantService.updateParticipant(participantId, participant);
-    }
-
-    @DeleteMapping("/participants/{participantId}")
-    public void deleteParticipant(@PathVariable String participantId) {
-        participantService.deleteParticipant(participantId);
-    }
-
-    // Endpoints pour l'entité Feedback
-
-    @GetMapping("/feedbacks")
-    public List<Feedback> getAllFeedbacks() {
-        return feedbackService.getAllFeedbacks();
-    }
-
-    @GetMapping("/feedbacks/{feedbackId}")
-    public Feedback getFeedbackById(@PathVariable String feedbackId) {
-        return feedbackService.getFeedbackById(feedbackId);
-    }
-
-    @PostMapping("/feedbacks")
-    public Feedback createFeedback(@RequestBody Feedback feedback) {
-        return feedbackService.createFeedback(feedback);
-    }
-
-    @PutMapping("/feedbacks/{feedbackId}")
-    public Feedback updateFeedback(@PathVariable String feedbackId, @RequestBody Feedback feedback) {
-        return feedbackService.updateFeedback(feedbackId, feedback);
-    }
-
-    @DeleteMapping("/feedbacks/{feedbackId}")
-    public void deleteFeedback(@PathVariable String feedbackId) {
-        feedbackService.deleteFeedback(feedbackId);
-    }
-
-    // Endpoints pour l'entité Attendance
-
-    @GetMapping("/attendances")
-    public List<Attendance> getAllAttendances() {
-        return attendanceService.getAllAttendances();
-    }
-
-    @GetMapping("/attendances/{attendanceId}")
-    public Attendance getAttendanceById(@PathVariable String attendanceId) {
-        return attendanceService.getAttendanceById(attendanceId);
-    }
-
-    @PostMapping("/attendances")
-    public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance) {
-        System.out.println("Received attendance: " + attendance);
-        if (attendance.getEvent() == null || attendance.getParticipantName() == null) {
-            throw new IllegalArgumentException("Attendance or required fields are missing");
+        @GetMapping("/participants")
+        public List<Participant> getAllParticipants() {
+            return participantService.getAllParticipants();
         }
 
-        Attendance createdAttendance = attendanceService.createAttendance(attendance);
-        return new ResponseEntity<>(createdAttendance, HttpStatus.CREATED); // Assurez-vous d'importer HttpStatus
-    }
+        @GetMapping("/participants/{participantId}")
+        public Participant getParticipantById(@PathVariable String participantId) {
+            return participantService.getParticipantById(participantId);
+        }
+
+        @PostMapping("/participants")
+        public Participant createParticipant(@RequestBody Participant participant) {
+            return participantService.createParticipant(participant);
+        }
+
+        @PutMapping("/participants/{participantId}")
+        public Participant updateParticipant(@PathVariable String participantId, @RequestBody Participant participant) {
+            return participantService.updateParticipant(participantId, participant);
+        }
+
+        @DeleteMapping("/participants/{participantId}")
+        public void deleteParticipant(@PathVariable String participantId) {
+            participantService.deleteParticipant(participantId);
+        }
 
 
+        // Endpoints pour l'entité Attendance
 
-    @PostMapping("/attendances/mark")
-    public ResponseEntity<Attendance> markAttendance(@RequestParam String eventId, @RequestParam String participantName, @RequestParam Boolean attended) {
-        Attendance attendance = attendanceService.markAttendance(eventId, participantName, attended);
-        return ResponseEntity.ok(attendance);
-    }
+        @GetMapping("/attendances")
+        public List<Attendance> getAllAttendances() {
+            return attendanceService.getAllAttendances();
+        }
 
-    @GetMapping("/attendances/event/{eventId}")
-    public ResponseEntity<List<Attendance>> getAttendancesForEvent(@PathVariable String eventId) {
-        List<Attendance> attendances = attendanceService.getAttendancesForEvent(eventId);
-        return ResponseEntity.ok(attendances);
-    }
+        @GetMapping("/attendances/{attendanceId}")
+        public Attendance getAttendanceById(@PathVariable String attendanceId) {
+            return attendanceService.getAttendanceById(attendanceId);
+        }
+
+        @PostMapping("/attendances")
+        public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance) {
+            System.out.println("Received attendance: " + attendance);
+            if (attendance.getEvent() == null || attendance.getParticipantName() == null) {
+                throw new IllegalArgumentException("Attendance or required fields are missing");
+            }
+
+            Attendance createdAttendance = attendanceService.createAttendance(attendance);
+            return new ResponseEntity<>(createdAttendance, HttpStatus.CREATED); // Assurez-vous d'importer HttpStatus
+        }
 
 
+        @PostMapping("/attendances/mark")
+        public ResponseEntity<Attendance> markAttendance(@RequestParam String eventId, @RequestParam String participantName, @RequestParam Boolean attended) {
+            Attendance attendance = attendanceService.markAttendance(eventId, participantName, attended);
+            return ResponseEntity.ok(attendance);
+        }
 
-    @PutMapping("/attendances/{attendanceId}")
-    public Attendance updateAttendance(@PathVariable String attendanceId, @RequestBody Attendance attendance) {
-        return attendanceService.updateAttendance(attendanceId, attendance);
-    }
+        @GetMapping("/attendances/event/{eventId}")
+        public ResponseEntity<List<Attendance>> getAttendancesForEvent(@PathVariable String eventId) {
+            List<Attendance> attendances = attendanceService.getAttendancesForEvent(eventId);
+            return ResponseEntity.ok(attendances);
+        }
 
-    @DeleteMapping("/attendances/{attendanceId}")
-    public void deleteAttendance(@PathVariable String attendanceId) {
-        attendanceService.deleteAttendance(attendanceId);
-    }
+
+        @PutMapping("/attendances/{attendanceId}")
+        public Attendance updateAttendance(@PathVariable String attendanceId, @RequestBody Attendance attendance) {
+            return attendanceService.updateAttendance(attendanceId, attendance);
+        }
+
+        @DeleteMapping("/attendances/{attendanceId}")
+        public void deleteAttendance(@PathVariable String attendanceId) {
+            attendanceService.deleteAttendance(attendanceId);
+        }
 
 // Endpoints pour l'entité Pet
 
-    @PostMapping("/pets")
-    public ResponseEntity<Pet> addPet(@RequestBody Pet pet) {
-        return ResponseEntity.ok(petService.addPet(pet));
-    }
+        @PostMapping("/pets")
+        public ResponseEntity<Pet> addPet(@RequestBody Pet pet) {
+            return ResponseEntity.ok(petService.addPet(pet));
+        }
 
-    @PutMapping("/pets/{id}")
-    public ResponseEntity<Pet> updatePet(@PathVariable String id, @RequestBody Pet petDetails) {
-        return ResponseEntity.ok(petService.updatePet(id, petDetails));
-    }
+        @PutMapping("/pets/{id}")
+        public ResponseEntity<Pet> updatePet(@PathVariable String id, @RequestBody Pet petDetails) {
+            return ResponseEntity.ok(petService.updatePet(id, petDetails));
+        }
 
-    @DeleteMapping("/pets/{id}")
-    public ResponseEntity<Void> deletePet(@PathVariable String id) {
-        petService.deletePet(id);
-        return ResponseEntity.noContent().build();
-    }
+        @DeleteMapping("/pets/{id}")
+        public ResponseEntity<Void> deletePet(@PathVariable String id) {
+            petService.deletePet(id);
+            return ResponseEntity.noContent().build();
+        }
 
-    @GetMapping("/pets/{id}")
-    public ResponseEntity<Pet> getPetById(@PathVariable String id) {
-        return ResponseEntity.ok(petService.getPetById(id));
-    }
+        @GetMapping("/pets/{id}")
+        public ResponseEntity<Pet> getPetById(@PathVariable String id) {
+            return ResponseEntity.ok(petService.getPetById(id));
+        }
 
-    @GetMapping("/pets")
-    public ResponseEntity<List<Pet>> getAllPets() {
-        return ResponseEntity.ok(petService.getAllPets());
-    }
+        @GetMapping("/pets")
+        public ResponseEntity<List<Pet>> getAllPets() {
+            return ResponseEntity.ok(petService.getAllPets());
+        }
         // Endpoints pour l'entité Vaccination
 
         @GetMapping("/vaccinations")
@@ -262,5 +237,44 @@
         public ResponseEntity<?> rejectBoarding(@PathVariable String id) {
             petBoardingService.rejectBoarding(id);
             return ResponseEntity.ok().build();
+        }
+        // Endpoints pour l'entité ChildcareProgram
+
+        @GetMapping("/childcare-programs")
+        public List<ChildcareProgram> getAllChildcarePrograms() {
+            return childcareProgramService.getAllChildcarePrograms();
+        }
+
+        @GetMapping("/childcare-programs/{id}")
+        public ResponseEntity<ChildcareProgram> getChildcareProgramById(@PathVariable String id) {
+            return childcareProgramService.getChildcareProgramById(id)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+        }
+
+        @PostMapping("/childcare-programs")
+        @ResponseStatus(HttpStatus.CREATED) // Retourne le statut 201
+        public ChildcareProgram createChildcareProgram(@RequestBody ChildcareProgram childcareProgram) {
+            return childcareProgramService.addChildcareProgram(childcareProgram);
+        }
+
+        @PutMapping("/childcare-programs/{id}")
+        public ResponseEntity<ChildcareProgram> updateChildcareProgram(@PathVariable String id, @RequestBody ChildcareProgram childcareProgram) {
+            return childcareProgramService.getChildcareProgramById(id)
+                    .map(existingProgram -> {
+                        childcareProgram.setId(id);
+                        return ResponseEntity.ok(childcareProgramService.updateChildcareProgram(childcareProgram));
+                    })
+                    .orElse(ResponseEntity.notFound().build());
+        }
+
+        @DeleteMapping("/childcare-programs/{id}")
+        public ResponseEntity<Void> deleteChildcareProgram(@PathVariable String id) {
+            if (childcareProgramService.getChildcareProgramById(id).isPresent()) {
+                childcareProgramService.deleteChildcareProgram(id);
+                return ResponseEntity.noContent().build();
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         }
     }

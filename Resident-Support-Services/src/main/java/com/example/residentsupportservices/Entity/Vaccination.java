@@ -16,7 +16,18 @@ public class Vaccination {
     private LocalDate vaccinationDate; // Date de la vaccination
     private LocalDate nextDueDate; // Date de prochaine vaccination
     private String status; // Statut de la vaccination (par exemple, "completed", "due")
+    // Constructeur sans argument (déjà existant)
+    public Vaccination() {}
 
+    // Constructeur avec paramètres
+    public Vaccination(String id, String petId, String vaccinationName, LocalDate vaccinationDate, LocalDate nextDueDate, String status) {
+        this.id = id;
+        this.petId = petId;
+        this.vaccinationName = vaccinationName;
+        this.vaccinationDate = vaccinationDate;
+        this.nextDueDate = nextDueDate;
+        this.status = status;
+    }
     // Getters et Setters
     public String getId() {
         return id;
