@@ -153,6 +153,8 @@
         <module>tawasalna-facilities-management</module>
         <module>tawasalna-crisis</module>
         <module>tawasalna-security-safety</module>
+        <module>tawasalna-operations</module>
+
 
 
     </modules>
