@@ -4,14 +4,11 @@ import com.tawasalna.facilitiesmanagement.models.ParkingAllocation;
 import com.tawasalna.facilitiesmanagement.service.IParkingAllocation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @Slf4j
@@ -93,12 +90,25 @@ public class ParkingAllocationController {
             return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/advanced-statistics")
+   /* @GetMapping("/advanced-statistics")
     public Map<String, Object> getAdvancedTrafficStatistics(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime) {
         return iParkingAllocation.calculateAdvancedTrafficStatistics(startTime, endTime);
     }
-
-
+    @GetMapping("/entries/{parkingLotId}")
+    public Map<LocalDateTime, Integer> getEntriesAnalysis(@PathVariable String parkingLotId) {
+        return iParkingAllocation.analyzeEntries(parkingLotId);
+    }*/
+    /*@GetMapping("/allocations/count/{parkingLotId}")
+    public ResponseEntity<Long> getAllocationCount(@PathVariable String parkingLotId) {
+        long count = iParkingAllocation.countAllocationsByParkingLotId(parkingLotId);
+        return ResponseEntity.ok(count);
+    }
+*/
+   @GetMapping("/allocations/count/{parkingLotId}")
+   public ResponseEntity<Long> getAllocationCount(@PathVariable String parkingLotId) {
+       long count = iParkingAllocation.countVehiclesEnteredDuringRange(parkingLotId);
+       return ResponseEntity.ok(count);
+   }
 }

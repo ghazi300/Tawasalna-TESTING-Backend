@@ -2,16 +2,15 @@ package com.tawasalna.facilitiesmanagement.service;
 
 import com.tawasalna.facilitiesmanagement.models.*;
 import com.tawasalna.facilitiesmanagement.repository.ParkingAllocationRepository;
+import com.tawasalna.facilitiesmanagement.repository.ParkingLotRepository;
 import com.tawasalna.facilitiesmanagement.repository.ParkingSubSpaceRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.time.LocalTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -21,6 +20,8 @@ import java.util.stream.Collectors;
 public class ParkingAllocationImpl implements IParkingAllocation{
     private final ParkingAllocationRepository parkingAllocationRepository;
     private final ParkingSubSpaceRepository parkingSubSpaceRepository;
+    private final ParkingLotRepository parkingLotRepository;
+
     //add
     @Override
     public ParkingAllocation add(ParkingAllocation parkingAllocation) {
@@ -186,7 +187,7 @@ public class ParkingAllocationImpl implements IParkingAllocation{
 
     }
 
-    public Map<String, Object> calculateAdvancedTrafficStatistics(LocalDateTime startTime, LocalDateTime endTime) {
+   /* public Map<String, Object> calculateAdvancedTrafficStatistics(LocalDateTime startTime, LocalDateTime endTime) {
         List<ParkingAllocation> allocations = parkingAllocationRepository.findAllByStartTimeBetweenAndEndTimeBetween(startTime, endTime, startTime, endTime);
         Map<String, Long> entriesPerHour = allocations.stream()
                 .collect(Collectors.groupingBy(allocation -> String.valueOf(allocation.getStartTime().getHour()), Collectors.counting()));
@@ -207,5 +208,101 @@ public class ParkingAllocationImpl implements IParkingAllocation{
 
         return statistics;
     }
+*/
+ /* @Override
+    public Map<LocalDateTime, Integer> analyzeEntries(String parkingLotId) {
+        Map<LocalDateTime, Integer> entriesMap = new HashMap<>();
 
+        try {
+
+            ParkingLot parkingLot = parkingAllocationRepository.findByParkingsubSpace_ParkingSpaceref_ParkingLotId_Parkinglotid(parkingLotId);
+            System.err.println("parkingLot ************ : "+parkingLot);
+
+            if (parkingLot != null) {
+                LocalDateTime start = parkingLot.getOpeningdate();
+                LocalDateTime end = parkingLot.getClosingdate();
+                System.err.println("start ************ : "+start);
+
+                while (start.isBefore(end)) {
+                    List<ParkingAllocation> allocations = parkingAllocationRepository.findByStartTimeBetween(start, start.plus(15, ChronoUnit.MINUTES));
+
+                    System.err.println("allocations ************ : "+allocations);
+
+                    entriesMap.put(start, allocations.size());
+                    start = start.plus(15, ChronoUnit.MINUTES);
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid input: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("An error occurred while analyzing entries: " + e.getMessage());
+        }
+
+        return entriesMap;
+    }*/
+
+
+
+
+
+
+   /* public Map<LocalDateTime, Integer> analyzeExits(String parkingLotId) {
+        ParkingLot parkingLot = parkingLotRepository.findById(parkingLotId)
+                .orElseThrow(() -> new RuntimeException("Parking lot not found"));
+
+        LocalDateTime start = parkingLot.getOpeningdate();
+        LocalDateTime end = parkingLot.getClosingdate();
+
+        Map<LocalDateTime, Integer> exitsMap = new HashMap<>();
+        while (start.isBefore(end)) {
+            List<ParkingAllocation> allocations = parkingAllocationRepository.findByEndTimeBetween(start, start.plus(15, ChronoUnit.MINUTES));
+            exitsMap.put(start, allocations.size());
+            start = start.plus(15, ChronoUnit.MINUTES);
+        }
+
+        return exitsMap;
+    }*/
+
+
+   /* public long countAllocationsByParkingLotId(String parkingLotId) {
+        System.out.print(parkingLotId);
+        // Récupérer les informations du ParkingLot
+        ParkingLot parkingLot = parkingLotRepository.findById(parkingLotId)
+                .orElseThrow(() -> new RuntimeException("ParkingLot not found"));
+
+        // Obtenir les heures d'ouverture et de fermeture
+        LocalDateTime openingDate = parkingLot.getOpeningdate();
+        LocalDateTime closingDate = parkingLot.getClosingdate();
+
+        // Trouver les allocations dans l'intervalle de temps
+        List<ParkingAllocation> allocations = parkingAllocationRepository.findAllocationsByParkingLotIdAndTimeInterval(
+                parkingLotId, openingDate, closingDate
+        );
+
+        return allocations.size();
+    }*/
+   @Override
+    public long countVehiclesEnteredDuringRange(String parkingLotId) {
+        // Step 1: Retrieve ParkingLot by ID and verify its existence
+        Optional<ParkingLot> optionalParkingLot = parkingLotRepository.findById(parkingLotId);
+        if (optionalParkingLot.isEmpty()) {
+            throw new IllegalArgumentException("Parking lot with ID " + parkingLotId + " does not exist.");
+        }
+        ParkingLot parkingLot = optionalParkingLot.get();
+        // Step 2: Verify if any ParkingAllocation is associated with this ParkingLot ID
+        List<ParkingAllocation> allocations = parkingAllocationRepository.findAllocationsByParkingLotId(
+                parkingLotId);
+          System.out.print("allocations:***********"+allocations);
+        // Step 3: Get the openingdate and closingdate of the ParkingLot
+        LocalTime openingTime = parkingLot.getOpeningdate().toLocalTime();
+        LocalTime closingTime = parkingLot.getClosingdate().toLocalTime();
+        // Step 4: Get list of allocations at this parking lot and check if the status is ACTIVE
+       return allocations.stream()
+                .filter(allocation -> allocation.getStatus() == ParkingAllocationStatus.ACTIVE)
+                .filter(allocation -> {
+                    LocalTime startTime = allocation.getStartTime().toLocalTime();
+                    return !startTime.isBefore(openingTime) && !startTime.isAfter(closingTime);
+                })
+                .count();
+    }
 }
