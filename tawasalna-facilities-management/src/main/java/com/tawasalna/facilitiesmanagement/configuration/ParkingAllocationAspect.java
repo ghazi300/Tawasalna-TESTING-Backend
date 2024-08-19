@@ -22,10 +22,10 @@ public class ParkingAllocationAspect {
         iParkingAllocation.countByStatus(ParkingAllocationStatus.ACTIVE);
         log.info("Parking allocation added, calculating active vehicles count.");
     }
-    @AfterReturning("execution(* com.tawasalna.facilitiesmanagement.controller.ParkingAllocationController.addparkingspaceallocations(..))")
+   /* @AfterReturning("execution(* com.tawasalna.facilitiesmanagement.controller.ParkingAllocationController.addparkingspaceallocations(..))")
     public void staticAllocation(JoinPoint joinPoint) {
         parkingAllocation.calculateTotalActiveVehicles();
         log.info("statistic.");
-    }
+    }*/
 }
 
