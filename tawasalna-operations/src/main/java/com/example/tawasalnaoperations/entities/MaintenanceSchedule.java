@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import nonapi.io.github.classgraph.json.Id;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -19,7 +19,7 @@ public class MaintenanceSchedule {
     @Id
     private String scheduleId;
     private String gardenId;
-    private Date maintenanceDate;
+    private Date dateDebut;
+    private Date dateFin;
     private List<String> tasks;
-    private String status;
 }

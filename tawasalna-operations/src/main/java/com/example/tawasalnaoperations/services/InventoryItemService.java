@@ -1,7 +1,6 @@
 package com.example.tawasalnaoperations.services;
 
 import com.example.tawasalnaoperations.entities.InventoryItem;
-import com.example.tawasalnaoperations.entities.PestControlReport;
 import com.example.tawasalnaoperations.repositories.InventoryItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
