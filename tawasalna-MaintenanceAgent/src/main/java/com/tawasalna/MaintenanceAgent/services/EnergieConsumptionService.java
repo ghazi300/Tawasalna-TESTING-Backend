@@ -46,7 +46,7 @@ public class EnergieConsumptionService {
         INCREMENT_MAP.put(ComponentType.OTHER, 2.0);
     }
 
-    @Scheduled(fixedRate = 600000) // 60,000 ms = 1 minute
+    @Scheduled(fixedRate = 60000000) // 60,000 ms = 1 minute
     public void updateAmounts() {
         List<EnergieConsumption> consumptions = energieConsumptionRepository.findAll();
         double totalAmount = 0;

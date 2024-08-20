@@ -21,5 +21,9 @@ public enum ComponentType {
     COAL,
     GAS,
     GEOTHERMAL,
-    BIOMASS
+    BIOMASS,
+    NATURAL_GAS,
+    OIL,
+    ELECTRICITY
+
 }

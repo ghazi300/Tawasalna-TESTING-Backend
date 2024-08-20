@@ -129,3 +129,15 @@ _tawasalna-MaintenanceAgent/src/main/java/com/tawasalna/MaintenanceAgent/models/
 itawasalna-MaintenanceAgent/src/main/java/com/tawasalna/MaintenanceAgent/repos/EnergySourceRepository.java,5\6\56b197341bc63051a1e455803e3c150212e7761b
 ê
 `tawasalna-MaintenanceAgent/src/main/java/com/tawasalna/MaintenanceAgent/models/EnergySource.java,2\f\2f35d8f6c3167b900db008c19a1f31e203d3db06
+§
+ttawasalna-MaintenanceAgent/src/test/java/com/tawasalna/MaintenanceAgent/EnergieConsumptionSummaryControllerTest.java,0\d\0dbcb3b6b348bcad9d113e97d81ae8c1e77cb13c
+•
+utawasalna-MaintenanceAgent/src/main/java/com/tawasalna/MaintenanceAgent/controllers/EnergieConsumptionController.java,a\4\a4433301ba749463cd52befe52f8441a9852ea2d
+¨
+|tawasalna-MaintenanceAgent/src/main/java/com/tawasalna/MaintenanceAgent/controllers/EnergieConsumptionSummaryController.java,5\5\555b8e5f596c6bd0490ee14bb52a92bf4a50464a
+î
+dtawasalna-MaintenanceAgent/src/test/java/com/tawasalna/MaintenanceAgent/EquipmentControllerTest.java,4\8\48fdb37d424dc5647dbba2bec1b12cfa38ad5e0f
+ñ
+ftawasalna-MaintenanceAgent/src/test/java/com/tawasalna/MaintenanceAgent/AsignedTaskControllerTest.java,3\e\3e0d93623508a092e0459c06f77473d7a1084a71
+ù
+mtawasalna-MaintenanceAgent/src/main/java/com/tawasalna/MaintenanceAgent/models/EnergieConsumptionSummary.java,e\9\e9884c2182ff4c9aaf23212485914cbe83ac5f30
