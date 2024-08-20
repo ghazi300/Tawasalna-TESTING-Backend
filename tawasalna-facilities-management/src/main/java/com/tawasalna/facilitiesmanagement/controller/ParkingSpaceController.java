@@ -1,9 +1,7 @@
 package com.tawasalna.facilitiesmanagement.controller;
 
-import com.tawasalna.facilitiesmanagement.models.ParkingLot;
 import com.tawasalna.facilitiesmanagement.models.ParkingSpace;
 import com.tawasalna.facilitiesmanagement.models.ParkingSubSpace;
-import com.tawasalna.facilitiesmanagement.service.IParkingLot;
 import com.tawasalna.facilitiesmanagement.service.IParkingSpace;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,7 +13,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("parkingspace")
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ParkingSpaceController {
     IParkingSpace iParkingSpace;
     @PostMapping("addparkingSpace")
@@ -23,8 +21,8 @@ public class ParkingSpaceController {
         try {
             return new ResponseEntity<>(iParkingSpace.addParkingSpace(parkingSpace), HttpStatus.CREATED);
         } catch (Exception e) {
-            e.printStackTrace(); // This will print the stack trace to the logs
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
+            return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @GetMapping("getparkingspace")
@@ -32,15 +30,16 @@ public class ParkingSpaceController {
         try {
             return new ResponseEntity<>(iParkingSpace.getParkingSpaces(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @GetMapping("getparkingSubspace")
     public ResponseEntity<List<ParkingSubSpace>> getParkingsubspace() {
         try {
             return new ResponseEntity<>(iParkingSpace.getParkingSubSpaces(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @GetMapping("/{id}")
@@ -61,7 +60,7 @@ public class ParkingSpaceController {
 
     @DeleteMapping("deleteparkingspace/{id}")
     public ResponseEntity<Void> deleteParkingSpace(@PathVariable String id) {
-        iParkingSpace.delete(id);
+        iParkingSpace.deletespace(id);
         return ResponseEntity.noContent().build();
     }
 

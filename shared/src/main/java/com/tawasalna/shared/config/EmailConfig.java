@@ -14,7 +14,7 @@ import java.util.List;
 @Slf4j
 public class EmailConfig {
 
-    /*
+
     @Value("${spring.mail.username}")
     private String username;
 
@@ -67,5 +67,5 @@ public class EmailConfig {
         return mailer;
     }
 
-     */
+
 }

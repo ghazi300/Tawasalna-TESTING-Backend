@@ -1,11 +1,17 @@
 package com.tawasalna.tawasalnacrisis.services;
 
 import com.tawasalna.tawasalnacrisis.models.File;
+import com.tawasalna.tawasalnacrisis.payload.FileResponse;
 import com.tawasalna.tawasalnacrisis.repositories.FileRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,9 +43,13 @@ public class FileServiceImpl implements FileService{
         }
         return attachments;
     }
+    @Override
+    public Optional<File> getFileById(String id) {
+        return fileRepository.findById(id);
+    }
 
     @Override
-    public Optional<File> getFileByName(String filename) {
-        return fileRepository.findByFileName(filename);
+    public List<File> getAllFiles() {
+        return fileRepository.findAll();
     }
 }
