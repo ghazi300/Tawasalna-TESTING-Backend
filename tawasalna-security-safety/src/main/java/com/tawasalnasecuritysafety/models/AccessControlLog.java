@@ -1,6 +1,5 @@
 package com.tawasalnasecuritysafety.models;
 
-
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,8 +35,17 @@ public class AccessControlLog implements Serializable {
 
     @NotNull(message = "Time is mandatory")
     private LocalDateTime time;
+
+    public void setName(String name) {
+        this.personName = name;
+    }
+
+    public void setType(String type) {
+        this.entryType = type;
+    }
+
+    public String getName() {
+        return this.personName;
+    }
+
 }
-
-
-
-
