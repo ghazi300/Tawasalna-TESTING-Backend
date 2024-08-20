@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.tawasalna.auth.businesslogic.UserManagementServiceTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.030 s -- in com.tawasalna.auth.businesslogic.UserManagementServiceTest
-=======
-Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.038 s -- in com.tawasalna.auth.businesslogic.UserManagementServiceTest
->>>>>>> 4a9783e4e82619e078d93a5f9bcbd6d5eb7dcdad
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.034 s -- in com.tawasalna.auth.businesslogic.UserManagementServiceTest

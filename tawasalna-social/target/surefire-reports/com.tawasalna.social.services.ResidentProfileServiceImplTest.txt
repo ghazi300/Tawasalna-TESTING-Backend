@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.tawasalna.social.services.ResidentProfileServiceImplTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 s -- in com.tawasalna.social.services.ResidentProfileServiceImplTest
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.092 s -- in com.tawasalna.social.services.ResidentProfileServiceImplTest
->>>>>>> 4a9783e4e82619e078d93a5f9bcbd6d5eb7dcdad
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.090 s -- in com.tawasalna.social.services.ResidentProfileServiceImplTest

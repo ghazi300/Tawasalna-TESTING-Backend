@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\models\Property.java
 C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\repos\PropertyRepositoryCustom.java
 C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\repos\PropertyRepositoryCustomImpl.java
@@ -24,30 +23,3 @@ C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-p
 C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\payload\response\PropertyImageResponse.java
 C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\exceptions\InvalidPropertyException.java
 C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\payload\request\ContractDTO.java
-=======
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\repos\PropertyRepositoryCustomImpl.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\buisnesslogic\PropertyManagementServiceImpl.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\repos\PropertyRepository.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\models\enums\PropertyType.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\controllers\PropertyManagementController.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\config\CorsConfiguration.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\config\WebMvcConfig.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\payload\request\PropertyDTO.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\repos\ContractRepository.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\repos\PropertyRepositoryCustom.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\buisnesslogic\IContractManagementService.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\buisnesslogic\IPropertyManagementService.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\models\enums\PaymentMode.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\repos\UserRepository.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\payload\request\PropertyInfoDTO.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\exceptions\InvalidPropertyException.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\models\enums\PropertyStatus.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\TawasalnaPmsApplication.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\models\enums\Billing.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\buisnesslogic\ContractManagementServiceImp.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\models\Property.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\models\Contract.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\payload\request\ContractDTO.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\payload\response\PropertyImageResponse.java
-C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-pms\src\main\java\com\tawasalna\pms\repos\CommunityRepository.java
->>>>>>> 4a9783e4e82619e078d93a5f9bcbd6d5eb7dcdad
