@@ -13,5 +13,12 @@ public interface IParkingAllocation {
 
 
      List<ParkingSubSpace> getSubSpacesByParkingAllocation(String subSpaceId);
+      ParkingAllocation updateEndTime(ParkingAllocation allocation);
+    void deleteAllocation(String id);
 
+    ParkingAllocation addfine(ParkingAllocation allocation);
+    List<ParkingAllocation> getViolationParking();
+
+    Long calculateTotalActiveVehicles();
+     boolean verify(ParkingLot parkingLot);
 }

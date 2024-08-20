@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -41,6 +42,7 @@ public class Incident implements Serializable {
 
     @NotBlank(message = "Status is mandatory")
     private String status;
+    private List<CorrectiveAction> correctiveActions;
 
 
 }

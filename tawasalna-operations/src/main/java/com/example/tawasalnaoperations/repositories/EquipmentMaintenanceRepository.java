@@ -1,0 +1,9 @@
+package com.example.tawasalnaoperations.repositories;
+
+import com.example.tawasalnaoperations.entities.EquipmentMaintenance;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface EquipmentMaintenanceRepository extends MongoRepository<EquipmentMaintenance, String> {
+}

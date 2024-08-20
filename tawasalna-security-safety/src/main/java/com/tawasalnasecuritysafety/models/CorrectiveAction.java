@@ -28,7 +28,7 @@ public class CorrectiveAction {
     private String description;
     private String responsibleParty;
     private Date deadline;
-    private String status; //  "Pending", "Completed"
+    private String status;
 
     public void setDeadline(String date) {
         if (date != null && !date.isEmpty()) {

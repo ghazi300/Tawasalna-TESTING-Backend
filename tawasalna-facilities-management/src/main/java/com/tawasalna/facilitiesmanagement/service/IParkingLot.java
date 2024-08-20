@@ -10,7 +10,7 @@ public interface IParkingLot {
     ParkingLot add(ParkingLot parkingLot);
     ParkingLot update(String id, ParkingLot parkingLot);
     void delete(String id);
-
+    long getDistinctLocationCount();
 
 
 }

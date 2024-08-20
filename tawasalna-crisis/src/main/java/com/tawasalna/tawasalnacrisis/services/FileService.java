@@ -8,5 +8,7 @@ import java.util.Optional;
 
 public interface FileService {
     List<File> saveAttachments(MultipartFile[] files) throws Exception;
-    Optional<File> getFileByName(String filename);
+    Optional<File> getFileById(String id);
+
+    List<File> getAllFiles();
 }
