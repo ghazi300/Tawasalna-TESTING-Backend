@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-auth\src\test\java\com\tawasalna\auth\businesslogic\UserManagementServiceTest.java
 C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-auth\src\test\java\com\tawasalna\auth\businesslogic\PmsUsersManagementServiceImpTest.java
 C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-auth\src\test\java\com\tawasalna\auth\businesslogic\RoleServiceImplTest.java
@@ -5,3 +6,12 @@ C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-a
 C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-auth\src\test\java\com\tawasalna\auth\businesslogic\AuthServiceImplTest.java
 C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-auth\src\test\java\com\tawasalna\auth\businesslogic\PMSAuthServiceImpTest.java
 C:\Users\asust\Desktop\Summer\Back-end\tawasolna-backend-app-develop\tawasalna-auth\src\test\java\com\tawasalna\auth\businesslogic\ResidentManagementServiceImplTest.java
+=======
+C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-auth\src\test\java\com\tawasalna\auth\businesslogic\PmsUsersManagementServiceImpTest.java
+C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-auth\src\test\java\com\tawasalna\auth\businesslogic\AuthServiceImplTest.java
+C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-auth\src\test\java\com\tawasalna\auth\businesslogic\UserManagementServiceTest.java
+C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-auth\src\test\java\com\tawasalna\auth\businesslogic\ResidentManagementServiceImplTest.java
+C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-auth\src\test\java\com\tawasalna\auth\businesslogic\RoleServiceImplTest.java
+C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-auth\src\test\java\com\tawasalna\auth\businesslogic\PMSAuthServiceImpTest.java
+C:\Users\Mouadh\Desktop\4TWIN5\Stage Ipact\tawasolna-backend-app-develop\tawasalna-auth\src\test\java\com\tawasalna\auth\businesslogic\AssistanceServiceTest.java
+>>>>>>> 4a9783e4e82619e078d93a5f9bcbd6d5eb7dcdad

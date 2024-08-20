@@ -19,6 +19,7 @@
 
     <properties>
         <netty-socketio.version>2.0.3</netty-socketio.version>
+
     </properties>
 
     <dependencies>
@@ -88,6 +89,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+
             <optional>true</optional>
         </dependency>
 
@@ -133,6 +135,17 @@
             <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
     </dependencies>
 
     <modules>
@@ -143,6 +156,17 @@
         <module>tawasalna-business</module>
         <module>tawasalna-pms</module>
         <module>tawasalna-MaintenanceAgent</module>
+        <module>tawasalna-crm</module>
+        <module>Resident-Support-Services</module>
+        <module>tawasalna-community-engagement</module>
+        <module>Management-Coordination</module>
+        <module>tawasalna-facilities-management</module>
+        <module>tawasalna-crisis</module>
+        <module>tawasalna-security-safety</module>
+        <module>tawasalna-operations</module>
+
+
+
     </modules>
 
     <build>
