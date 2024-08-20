@@ -1,8 +1,0 @@
-
-a
-java:S1192,"FDefine a constant instead of duplicating this literal "price" 3 times.(¾ø‘úÿÿÿÿ
-Q	java:S125F"<This block of commented-out lines of code should be removed.(é©–¾
-O
-java:S1128"4Remove this unused import 'org.bson.types.ObjectId'.(Ü¡‰çıÿÿÿÿ
-n
-java:S1128"SRemove this unused import 'org.springframework.beans.factory.annotation.Autowired'.(¡¸Îùÿÿÿÿ
