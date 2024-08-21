@@ -9,6 +9,8 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,7 +26,8 @@ public class IncidentDto {
     private Type type;
     private Gravite gravite;
     private Status status;
-    private String location;
+    @GeoSpatialIndexed
+    private double[] location;
     private LocalDateTime date;
     private List<Resource> resources;
     private List<String> images;

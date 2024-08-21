@@ -2,6 +2,7 @@ package com.tawasalna.tawasalnacrisis.controllers;
 
 import com.tawasalna.tawasalnacrisis.models.File;
 import com.tawasalna.tawasalnacrisis.services.FileService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ import java.util.Optional;
 public class FileController {
     private FileService fileService;
     @PostMapping("/upload")
-    public ResponseEntity<List<File>> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+    public ResponseEntity<List<File>> uploadMultipleFiles(@Valid @RequestParam("files") MultipartFile[] files) {
         try {
             List<File> attachments = fileService.saveAttachments(files);
             return ResponseEntity.ok(attachments);

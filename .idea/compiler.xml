@@ -13,8 +13,8 @@
         <module name="tawasalna-business" />
         <module name="tawasalna-community-engagement" />
         <module name="tawasalna-pms" />
-        <module name="tawasalna-administration" />
         <module name="Management-Coordination" />
+        <module name="tawasalna-administration" />
         <module name="tawasalna-auth" />
         <module name="tawasalna-facilities-management" />
         <module name="tawasalna-crm" />
@@ -30,14 +30,18 @@
     <bytecodeTargetLevel>
       <module name="ManagementAndCoordination" target="17" />
       <module name="ManagementCoordination" target="17" />
+      <module name="Resident-Support-Services" target="17" />
       <module name="tawasalna-administration (1)" target="17" />
       <module name="tawasalna-administration (2)" target="17" />
+      <module name="tawasalna-crisis (1)" target="17" />
+      <module name="tawasalna-crisis (2)" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Management-Coordination" options="-parameters" />
       <module name="ManagementCoordination" options="-parameters" />
+      <module name="Resident-Support-Services" options="-parameters" />
       <module name="shared" options="-parameters" />
       <module name="tawasalna-administration" options="-parameters" />
       <module name="tawasalna-administration (1)" options="-parameters" />
@@ -46,6 +50,8 @@
       <module name="tawasalna-business" options="-parameters" />
       <module name="tawasalna-community-engagement" options="-parameters" />
       <module name="tawasalna-crisis" options="-parameters" />
+      <module name="tawasalna-crisis (1)" options="-parameters" />
+      <module name="tawasalna-crisis (2)" options="-parameters" />
       <module name="tawasalna-crm" options="-parameters" />
       <module name="tawasalna-facilities-management" options="-parameters" />
       <module name="tawasalna-pms" options="-parameters" />
