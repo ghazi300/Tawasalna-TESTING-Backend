@@ -1,6 +1,5 @@
 package com.tawasalna.facilitiesmanagement.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -24,6 +23,8 @@ public class ParkingSpace {
     private String    locationNumber;
     private int capacity;
     private int   occupiedSpaces;
-    @DBRef(lazy = false)
+
+    @DBRef(lazy = true)
+
     private List<ParkingSubSpace> subSpaces;
 }

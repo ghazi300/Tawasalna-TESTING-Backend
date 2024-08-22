@@ -1,10 +1,9 @@
 package com.tawasalna.facilitiesmanagement.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 @Getter
 @Setter
@@ -16,9 +15,8 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 public class ParkingSubSpace {
     @Id
     private String  subSpaceId;
-    @DocumentReference
-    @JsonIgnore
-    private ParkingSpace parkingSpaceId;
+    @DBRef
+    private ParkingSpace parkingSpaceref;
     private String     stationNumber;
     private ParkingSubSpaceStatus status ;
 

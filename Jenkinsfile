@@ -13,8 +13,6 @@ pipeline {
         DOCKER_IMAGE_Back_social = 'brahim98/tawasolna_back:socialspringimage'
         DOCKER_IMAGE_Back_business = 'brahim98/tawasolna_back:businessspringimage'
 
-
-
     }
 
     stages {
