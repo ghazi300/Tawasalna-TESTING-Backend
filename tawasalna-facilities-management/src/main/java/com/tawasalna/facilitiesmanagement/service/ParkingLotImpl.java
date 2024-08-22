@@ -39,7 +39,7 @@ public class ParkingLotImpl implements  IParkingLot{
 
             return parkingLotRepository.save(parkingLot1Update);
         } else {
-            throw new RuntimeException("Record not found ");
+             throw new RuntimeException("Record not found ");
         }
     }
 
@@ -49,4 +49,11 @@ public class ParkingLotImpl implements  IParkingLot{
                 .orElseThrow(() -> new RuntimeException(id));
         parkingLotRepository.deleteById(id);
     }
+
+    @Override
+    public long getDistinctLocationCount() {
+        return parkingLotRepository.count();
+    }
+
+
 }

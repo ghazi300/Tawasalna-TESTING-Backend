@@ -1,0 +1,6 @@
+FROM openjdk:17
+EXPOSE 9002
+ADD target/Resident-Support-Services-0.0.1-SNAPSHOT.jar Resident-Support-Services-0.0.1-SNAPSHOT.jar
+COPY /Resident-Support-Services/target/Resident-Support-Services-0.0.1-SNAPSHOT.jar Resident-Support-Services-0.0.1-SNAPSHOT.jar
+COPY /shared/target/shared-0.0.2-SNAPSHOT.jar shared-0.0.2-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","Resident-Support-Services-0.0.1-SNAPSHOT.jar"]
