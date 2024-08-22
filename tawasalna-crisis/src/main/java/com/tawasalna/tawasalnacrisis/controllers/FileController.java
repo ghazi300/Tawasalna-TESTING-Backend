@@ -2,7 +2,10 @@ package com.tawasalna.tawasalnacrisis.controllers;
 
 import com.tawasalna.tawasalnacrisis.models.File;
 import com.tawasalna.tawasalnacrisis.services.FileService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +20,7 @@ import java.util.Optional;
 public class FileController {
     private FileService fileService;
     @PostMapping("/upload")
-    public ResponseEntity<List<File>> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+    public ResponseEntity<List<File>> uploadMultipleFiles(@Valid @RequestParam("files") MultipartFile[] files) {
         try {
             List<File> attachments = fileService.saveAttachments(files);
             return ResponseEntity.ok(attachments);
@@ -25,25 +28,20 @@ public class FileController {
             return ResponseEntity.status(500).body(null);
         }
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<byte[]> getFileById(@PathVariable String id) {
-        System.out.println("Fetching file with ID: " + id); // Ajoutez un log pour vérifier l'ID
-        Optional<File> fileOptional = fileService.getFileById(id);
+
+
+
+    @GetMapping("/{filename}")
+    public ResponseEntity<byte[]> getFileByName(@PathVariable String filename) {
+        Optional<File> fileOptional = fileService.getFileByName(filename);
         if (fileOptional.isPresent()) {
             File file = fileOptional.get();
             return ResponseEntity.ok()
-                    .header("Content-Type", file.getFileType())
-                    .header("Content-Disposition", "attachment; filename=\"" + file.getFileName() + "\"")
+                    .header(HttpHeaders.CONTENT_TYPE, file.getFileType())
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFileName() + "\"")
                     .body(file.getData());
         } else {
-            System.out.println("File not found with ID: " + id); // Ajoutez un log pour les cas où le fichier n'est pas trouvé
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-    }
-
-
-    @GetMapping
-    public ResponseEntity<List<File>> getAllFiles() {
-        return ResponseEntity.ok(fileService.getAllFiles());
     }
 }

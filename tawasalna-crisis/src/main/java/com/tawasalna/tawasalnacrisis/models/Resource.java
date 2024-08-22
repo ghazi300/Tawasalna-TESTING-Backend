@@ -2,10 +2,13 @@ package com.tawasalna.tawasalnacrisis.models;
 
 import org.springframework.boot.availability.AvailabilityChangeEvent;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+
+import java.util.List;
 
 @Document(collection = "resources")
 @Data
@@ -18,6 +21,8 @@ public class Resource {
     private String name;
     private Type type;
     private Availability availability;
-    private String location;
+    @GeoSpatialIndexed
+    private double[] location;
+    private List<String> images;
 
 }

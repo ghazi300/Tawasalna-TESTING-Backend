@@ -8,6 +8,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
@@ -26,11 +27,9 @@ import java.util.List;
 public class Incident implements Serializable {
     @Id
     private String id;
-
     @NotBlank(message = "Title is mandatory")
-    @Size(max = 100, message = "Title cannot exceed 100 characters")
     String title;
-    @NotBlank(message = "Title is mandatory")
+    @NotBlank(message = "Type is mandatory")
     Type type;
 
     @NotBlank(message = "Description is mandatory")
@@ -38,8 +37,8 @@ public class Incident implements Serializable {
     String description;
 
     @NotBlank(message = "Location is mandatory")
-    @Size(max = 200, message = "Location cannot exceed 200 characters")
-    String location;
+    @GeoSpatialIndexed
+    private double[] location;
 
     @NotNull(message = "Date is mandatory")
     LocalDateTime date;

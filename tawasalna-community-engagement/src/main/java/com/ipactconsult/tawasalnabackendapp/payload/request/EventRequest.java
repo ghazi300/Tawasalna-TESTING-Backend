@@ -31,5 +31,7 @@ public class EventRequest {
     @NotNull(message = "Status is required")
     StatusEvent status ;
 
+    String imageId;
+
 
 }

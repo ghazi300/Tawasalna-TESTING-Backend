@@ -11,7 +11,7 @@ public class EquipmentMaintenanceLogMapper {
         return EquipmentMaintenanceLog.builder()
                 .equipmentId(request.getEquipmentId())
                 .technicianId(request.getTechnicianId())
-                .maintenanceDate(request.getMaintenanceDate())
+                .nextScheduledDate(request.getNextScheduledDate())
                 .description(request.getDescription())
 
 
@@ -23,6 +23,7 @@ public class EquipmentMaintenanceLogMapper {
                 .id(maintenanceLog.getId())
                 .equipmentId(maintenanceLog.getEquipmentId())
                 .technicianId(maintenanceLog.getTechnicianId())
+                .nextScheduledDate(maintenanceLog.getNextScheduledDate())
                 .maintenanceDate(maintenanceLog.getMaintenanceDate())
                 .description(maintenanceLog.getDescription())
                 .build();

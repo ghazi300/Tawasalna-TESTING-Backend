@@ -9,13 +9,8 @@ import com.tawasalna.tawasalnacrisis.payload.IncidentPayload;
 import com.tawasalna.tawasalnacrisis.payload.RecentIncidentDto;
 import com.tawasalna.tawasalnacrisis.repositories.IncidentRepository;
 import com.tawasalna.tawasalnacrisis.repositories.ResourceRepository;
-import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.tawasalna.shared.api.service.IFileUploaderAPI;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;

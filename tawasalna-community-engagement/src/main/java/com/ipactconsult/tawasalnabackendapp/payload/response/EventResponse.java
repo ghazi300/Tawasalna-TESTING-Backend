@@ -6,6 +6,8 @@ import com.ipactconsult.tawasalnabackendapp.models.StatusEvent;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -26,4 +28,9 @@ public class EventResponse {
      LocalDateTime createdDate;
      String lastModifiedBy;
      LocalDateTime lastModifiedDate;
+      String imageId;
+     int participationCount;
+     List<String> participants;
+     int likeCount;
+     List<String> likes;
 }
