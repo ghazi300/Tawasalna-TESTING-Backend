@@ -19,6 +19,7 @@ public class EventMapper {
                 .endDate(LocalDateTime.parse(eventRequest.getEndDate()))
                 .category(eventRequest.getCategory())
                 .status(eventRequest.getStatus())
+                .imageId(eventRequest.getImageId())
 
                 .build();
     }
@@ -37,7 +38,11 @@ public class EventMapper {
                 .createdBy(event.getCreatedBy())
                 .startDate(event.getStartDate())
                 .endDate(event.getEndDate())
-
+                .imageId(event.getImageId())
+                .participationCount(event.getParticipationCount())
+                .participants(event.getParticipants())
+                .likes(event.getLikes())
+                .likeCount(event.getLikeCount())
                 .build();
     }
 }

@@ -19,4 +19,14 @@ public interface IEventService {
     void updateEvent(String eventId, EventRequest eventRequest);
 
     void deleteEvent(String eventId);
+
+    List<EventResponse> getAllEventPlanned();
+
+    boolean participateInEvent(String eventId, String userId);
+
+    boolean unparticipateInEvent(String eventId, String userId);
+
+    boolean likeEvent(String eventId, String userId);
+
+    boolean unlikeEvent(String eventId, String userId);
 }

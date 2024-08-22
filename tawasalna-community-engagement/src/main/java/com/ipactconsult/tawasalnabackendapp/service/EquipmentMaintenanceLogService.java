@@ -36,4 +36,16 @@ public class EquipmentMaintenanceLogService implements IEquipmentMaintenanceLogS
                 .map(equipmentMaintenanceLogMapper::mapToResponse)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<EquipmentMaintenanceLogResponse> getMaintenanceLogsByEquipmentId(String equipmentId) {
+        List<EquipmentMaintenanceLog> maintenanceLogs=equipmentMaintenanceLogRepository.findByEquipmentId(equipmentId);
+
+        return maintenanceLogs.stream().map(equipmentMaintenanceLogMapper::mapToResponse).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteLog(String id) {
+        equipmentMaintenanceLogRepository.deleteById(id);
+    }
 }

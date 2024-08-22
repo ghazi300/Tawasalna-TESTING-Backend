@@ -9,4 +9,8 @@ public interface IEquipmentMaintenanceLogService {
     String save(EquipmentMaintenanceLogRequest request);
 
     List<EquipmentMaintenanceLogResponse> getAllMaintenanceLogs();
+
+    List<EquipmentMaintenanceLogResponse> getMaintenanceLogsByEquipmentId(String equipmentId);
+
+    void deleteLog(String id);
 }

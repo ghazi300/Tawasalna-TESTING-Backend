@@ -2,7 +2,8 @@ package com.ipactconsult.tawasalnabackendapp.payload.response;
 
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,6 +14,7 @@ public class EquipmentMaintenanceLogResponse {
     private String id;
     private String equipmentId;
     private String technicianId;
-    private Date maintenanceDate;
+    private LocalDateTime maintenanceDate;
     private String description;
+    private LocalDateTime nextScheduledDate;
 }

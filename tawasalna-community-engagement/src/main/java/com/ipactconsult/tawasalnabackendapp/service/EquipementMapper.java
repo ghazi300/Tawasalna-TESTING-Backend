@@ -22,6 +22,11 @@ public class EquipementMapper {
                 .name(equipment.getName())
                 .description(equipment.getDescription())
                 .location(equipment.getLocation())
+                .installationDate(equipment.getInstallationDate())
+                .status(equipment.getStatus())
+
+
+
 
 
                 .build();

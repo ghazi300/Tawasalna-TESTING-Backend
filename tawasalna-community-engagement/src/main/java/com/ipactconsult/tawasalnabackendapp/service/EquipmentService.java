@@ -1,6 +1,8 @@
 package com.ipactconsult.tawasalnabackendapp.service;
 
+import com.ipactconsult.tawasalnabackendapp.exceptions.EquipmentNotFoundException;
 import com.ipactconsult.tawasalnabackendapp.models.Equipment;
+import com.ipactconsult.tawasalnabackendapp.models.StatusEquipement;
 import com.ipactconsult.tawasalnabackendapp.payload.request.EquipementRequest;
 import com.ipactconsult.tawasalnabackendapp.payload.response.EquipementResponse;
 import com.ipactconsult.tawasalnabackendapp.repository.EquipmentRepository;
@@ -20,6 +22,7 @@ public class EquipmentService implements IEquipmentService {
     @Override
     public String save(EquipementRequest equipementRequest) {
         Equipment equipment=equipementMapper.toEquipement(equipementRequest);
+        equipment.setStatus(StatusEquipement.EN_SERVICE);
         return equipmentRepository.save(equipment).getId();
     }
 
@@ -32,5 +35,22 @@ public class EquipmentService implements IEquipmentService {
     @Override
     public void deleteEquipment(String id) {
         equipmentRepository.deleteById(id);
+    }
+
+
+
+    @Override
+    public EquipementResponse getEquipmentById(String id) {
+        Equipment equipment=equipmentRepository.findById(id).orElseThrow(() -> new EquipmentNotFoundException("Equipment not found"));
+        EquipementResponse equipementResponse=equipementMapper.toEquipementResponse(equipment);
+        return equipementResponse;
+    }
+
+    @Override
+    public void updateEquipmentStatus(String id, StatusEquipement newStatus) {
+        Equipment equipment = equipmentRepository.findById(id)
+                .orElseThrow(() -> new EquipmentNotFoundException("Equipment not found"));
+        equipment.setStatus(newStatus);
+        equipmentRepository.save(equipment);
     }
 }

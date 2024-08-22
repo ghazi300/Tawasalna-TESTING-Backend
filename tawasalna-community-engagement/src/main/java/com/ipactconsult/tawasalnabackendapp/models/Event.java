@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
@@ -36,4 +37,10 @@ public class Event {
     private String lastModifiedBy;
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
+    private String imageId;
+    private List<String> participants= new ArrayList<>();;
+    private int participationCount;
+    private List<String> likes = new ArrayList<>();
+    private int likeCount;
+
 }

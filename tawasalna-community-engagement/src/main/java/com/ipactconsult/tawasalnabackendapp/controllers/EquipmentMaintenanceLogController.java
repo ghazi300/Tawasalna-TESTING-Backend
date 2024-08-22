@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("equipmentmaintenancelog")
+@CrossOrigin("*")
 
 public class EquipmentMaintenanceLogController {
     private final IEquipmentMaintenanceLogService service;
@@ -27,5 +28,15 @@ public class EquipmentMaintenanceLogController {
         List<EquipmentMaintenanceLogResponse> logs = service.getAllMaintenanceLogs();
         return ResponseEntity.ok(logs);
 
+    }
+
+    @GetMapping("/{equipmentId}")
+    public ResponseEntity<List<EquipmentMaintenanceLogResponse>> getMaintenanceLogsByEquipmentId(@PathVariable String equipmentId) {
+        return ResponseEntity.ok(service.getMaintenanceLogsByEquipmentId(equipmentId));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void>deletelog(@PathVariable String id) {
+        service.deleteLog(id);
+        return ResponseEntity.noContent().build();
     }
 }
