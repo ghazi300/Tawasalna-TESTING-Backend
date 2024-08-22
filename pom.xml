@@ -164,9 +164,6 @@
         <module>tawasalna-crisis</module>
         <module>tawasalna-security-safety</module>
         <module>tawasalna-operations</module>
-
-
-
     </modules>
 
     <build>
