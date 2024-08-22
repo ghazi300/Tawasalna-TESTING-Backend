@@ -6,22 +6,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.Date;
+import java.math.BigDecimal;
 import java.util.List;
 
-@Getter
-@Setter
+@Document(collection = "budgets")
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "newsletters")
-public class Newsletter {
+@Getter
+@Setter
+public class Budget {
+
     @Id
     private String id;
-    private String subject;
-    private String content;
-    private List<String> recipients;
-    private Date sentDate;
-    private String filePath;
-    private int responseCount;
+
+    private String year;
+    private BigDecimal totalAmount;
+    private BigDecimal allocatedAmount;
+    private BigDecimal spentAmount;
+    private BigDecimal remainingAmount;
+    private String department ;
+
 }

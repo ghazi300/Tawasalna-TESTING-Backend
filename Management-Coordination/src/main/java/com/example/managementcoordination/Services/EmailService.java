@@ -5,6 +5,9 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import com.example.managementcoordination.entities.Newsletter;
+import com.example.managementcoordination.repositories.NewsletterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -13,6 +16,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,15 +32,31 @@ public class EmailService {
     private AtomicInteger emailCount = new AtomicInteger(0);
     private List<Date> emailTimestamps = new ArrayList<>();
     private AtomicInteger responseCount = new AtomicInteger(0);
+    @Autowired
+    private NewsletterRepository newsletterRepository ;
 
-
-    public void sendNewsletter(String subject, String content, List<String> recipients , MultipartFile pdf) {
-        MimeMessage mimeMessage = createMimeMessage(subject, content, recipients , pdf);
+    public void sendNewsletter(String subject, String content, List<String> recipients, MultipartFile pdf) {
+        MimeMessage mimeMessage = createMimeMessage(subject, content, recipients, pdf);
         javaMailSender.send(mimeMessage);
         emailCount.incrementAndGet();
         emailTimestamps.add(new Date());
 
+        Newsletter newsletter = new Newsletter();
+        newsletter.setSubject(subject);
+        newsletter.setContent(content);
+        newsletter.setRecipients(recipients);
+        newsletter.setSentDate(new Date());
+
+        if (pdf != null && !pdf.isEmpty()) {
+            String filePath = saveFile(pdf);
+            newsletter.setFilePath(filePath);
+        }
+
+
+        newsletterRepository.save(newsletter);
     }
+
+
 
     private MimeMessage createMimeMessage(String subject, String content, List<String> recipients, MultipartFile pdf) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -60,15 +80,12 @@ public class EmailService {
         return mimeMessage;
     }
 
-
     public List<String> getNewsletterSubscribers() {
-        // Static list of subscribers
         return List.of(
                 "nahdii13@gmail.com",
                 "nahdii13@gmail.com"
         );
     }
-
     public String generateNewsletterContent() {
         return "<html>" +
                 "<head>" +
@@ -109,22 +126,73 @@ public class EmailService {
         return emailCount.get();
     }
 
-
     public int getTotalEmailsSentInTimeFrame(Date start, Date end) {
         return (int) emailTimestamps.stream()
                 .filter(timestamp -> !timestamp.before(start) && !timestamp.after(end))
                 .count();
     }
-    public void recordResponse() {
-        responseCount.incrementAndGet();
+
+    public void recordResponse(String newsletterId) {
+        Newsletter newsletter = newsletterRepository.findById(newsletterId)
+                .orElseThrow(() -> new RuntimeException("Newsletter not found"));
+
+        newsletter.setResponseCount(newsletter.getResponseCount() + 1);
+
+        newsletterRepository.save(newsletter);
+
+        System.out.println("Response recorded. Total responses for newsletter '" + newsletter.getSubject() + "': " + newsletter.getResponseCount());
     }
-    public int getTotalResponses() {
-        return responseCount.get();
+
+    public int getTotalResponses(String newsletterId) {
+        Newsletter newsletter = newsletterRepository.findById(newsletterId)
+                .orElseThrow(() -> new RuntimeException("Newsletter not found"));
+
+        return newsletter.getResponseCount();
     }
+
     public double getResponsePercentage() {
         int totalEmails = emailCount.get();
         int totalResponses = responseCount.get();
         if (totalEmails == 0) return 0.0;
         return (totalResponses / (double) totalEmails) * 100;
     }
+
+
+    public void deleteNewsletter(String id) {
+        newsletterRepository.deleteById(id);
+    }
+
+    public Newsletter updateNewsletter(Newsletter newsletter) {
+        return newsletterRepository.save(newsletter);
+    }
+
+    public List<Newsletter> getAllNewsletters() {
+        return newsletterRepository.findAll();
+    }
+
+
+
+    private String saveFile(MultipartFile file) {
+        try {
+            // Define where the file will be stored
+            String uploadDir = "uploads/newsletters/";
+
+            // Create the directory if it doesn't exist
+            File directory = new File(uploadDir);
+            if (!directory.exists()) {
+                directory.mkdirs(); // Create the directory if it doesn't exist
+            }
+
+            // Create the full file path
+            String filePath = uploadDir + file.getOriginalFilename();
+
+            // Save the file locally
+            File destinationFile = new File(filePath);
+            file.transferTo(destinationFile);
+
+            // Return the file path
+            return filePath;
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to save file", e);
+        }}
 }
