@@ -1,5 +1,4 @@
-    package com.example.residentsupportservices.controllers;
-
+    package com.example.residentsupportservices.Controlleur;
     import com.example.residentsupportservices.Entity.ChildcareProgram;
     import com.example.residentsupportservices.Entity.Pet;
     import com.example.residentsupportservices.Entity.PetBoarding;
@@ -10,18 +9,17 @@
     import com.example.residentsupportservices.Services.IVaccinationService;
     import com.example.residentsupportservices.entity.Attendance;
     import com.example.residentsupportservices.entity.Event;
-    import com.example.residentsupportservices.entity.Feedback;
     import com.example.residentsupportservices.entity.Participant;
     import com.example.residentsupportservices.services.IAttendanceService;
     import com.example.residentsupportservices.services.IEventService;
     import com.example.residentsupportservices.services.IFeedbackService;
     import com.example.residentsupportservices.services.IParticipantService;
     import lombok.AllArgsConstructor;
+    import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;
 
     import java.util.List;
-    import org.springframework.http.HttpStatus;
 
     @RestController
     @AllArgsConstructor

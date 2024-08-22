@@ -1,4 +1,4 @@
-package com.example.residentsupportservices.Controller;
+package com.example.residentsupportservices.Controlleur;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,7 +13,7 @@ import java.util.Collections;
 @RequestMapping("/api")
 public class FileUploadController {
 
-    private static final String UPLOAD_DIR = "C:\\Users\\abidf\\Tawasalna-PMS\\src\\assets\\images";
+    private static final String UPLOAD_DIR = "G:\\Esprit4TWIN4\\stage\\src\\assets\\images";
 
     @PostMapping("/upload")
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {

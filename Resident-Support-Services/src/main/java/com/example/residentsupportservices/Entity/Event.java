@@ -5,13 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Document(collection = "eventt")
@@ -31,7 +30,7 @@ public class Event {
     private LocalDateTime end;
 
     @DBRef
-    private List<Participant> participants;
+    private List<com.example.residentsupportservices.entity.Participant> participants;
 
     private String location;
     private String description;

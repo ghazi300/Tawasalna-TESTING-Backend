@@ -1,10 +1,13 @@
 package com.example.residentsupportservices;
 
+import com.example.residentsupportservices.Entity.ChildcareProgram;
+import com.example.residentsupportservices.Entity.Pet;
+import com.example.residentsupportservices.Entity.Vaccination;
 import com.example.residentsupportservices.Services.IChildcareProgramService;
 import com.example.residentsupportservices.Services.IPetService;
 import com.example.residentsupportservices.Services.IVaccinationService;
 import com.example.residentsupportservices.entity.Event;
-import com.example.residentsupportservices.services.*;
+import com.example.residentsupportservices.entity.Participant;
 import org.apache.http.client.utils.DateUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +16,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import com.example.residentsupportservices.entity.Participant;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-import com.example.residentsupportservices.Entity.*;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
@@ -35,7 +37,7 @@ class ApiTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private IEventService eventService;
+    private com.example.residentsupportservices.services.IEventService eventService;
     @MockBean
     private com.example.residentsupportservices.services.IParticipantService participantService;
     @MockBean

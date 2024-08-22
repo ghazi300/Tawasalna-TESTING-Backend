@@ -163,6 +163,7 @@
         <module>tawasalna-crisis</module>
         <module>tawasalna-security-safety</module>
         <module>tawasalna-operations</module>
+        <module>Resident-Support-Services</module>
     </modules>
 
     <build>
