@@ -1,4 +1,4 @@
-package com.example.managementcoordination;
+package com.example.managementcoordination.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

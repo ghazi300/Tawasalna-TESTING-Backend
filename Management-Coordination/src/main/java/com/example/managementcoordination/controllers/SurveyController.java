@@ -1,6 +1,9 @@
-package com.example.managementcoordination;
+package com.example.managementcoordination.controllers;
+import com.example.managementcoordination.Services.EmailService;
 import com.example.managementcoordination.Services.SurveyService;
+import com.example.managementcoordination.entities.Survey;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,4 +62,7 @@ public class SurveyController {
     public Map<String, Double> getSurveyPercentages() {
         return surveyService.calculateSurveyPercentages();
     }
+
+
+
 }
