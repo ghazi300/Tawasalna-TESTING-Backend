@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,11 +24,11 @@ public class Event {
     private String id;
 
     private String title;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date start;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime start;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date end;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime end;
 
     @DBRef
     private List<Participant> participants;
@@ -37,7 +39,9 @@ public class Event {
     private String imageUrl;
     private Integer maxParticipants;
     private String notes;
+
     public Event(String id) {
         this.id = id;
+        this.participants = new ArrayList<>();
     }
 }
