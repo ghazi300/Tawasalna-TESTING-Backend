@@ -1,0 +1,6 @@
+FROM openjdk:17
+EXPOSE 9001
+ADD target/tawasalna-community-engagement-0.0.1-SNAPSHOT.jar tawasalna-community-engagement-0.0.1-SNAPSHOT.jar
+COPY /tawasalna-community-engagement/target/tawasalna-community-engagement-0.0.1-SNAPSHOT.jar tawasalna-community-engagement-0.0.1-SNAPSHOT.jar
+COPY /shared/target/shared-0.0.2-SNAPSHOT.jar shared-0.0.2-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","tawasalna-community-engagement-0.0.1-SNAPSHOT.jar"]
