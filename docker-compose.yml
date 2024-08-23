@@ -1,0 +1,138 @@
+version: '3.8'
+
+services:
+  shared:
+    build:
+      context: .
+      dockerfile: Dockerfile-shared
+    ports:
+      - "8086:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  tawasalna-administration:
+    build:
+      context: .
+      dockerfile: Dockerfile-administration
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  tawasalna-auth:
+    build:
+      context: .
+      dockerfile: Dockerfile-authentication
+    ports:
+      - "8081:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  tawasalna-business:
+    build:
+      context: .
+      dockerfile: Dockerfile-business
+    ports:
+      - "8082:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  tawasalna-crm:
+    build:
+      context: .
+      dockerfile: Dockerfile-crm
+    ports:
+      - "8083:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  management-coordination:
+    build:
+      context: .
+      dockerfile: Dockerfile-management-coordination
+    ports:
+      - "9003:9003"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  tawasalna-pms:
+    build:
+      context: .
+      dockerfile: Dockerfile-pms
+    ports:
+      - "8084:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  resident-support-services:
+    build:
+      context: .
+      dockerfile: Dockerfile-resident-support-services
+    ports:
+      - "9002:9002"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  tawasalna-social:
+    build:
+      context: .
+      dockerfile: Dockerfile-social
+    ports:
+      - "8085:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  tawasalna-community-engagement:
+    build:
+      context: .
+      dockerfile: Dockerfile-community-engagement
+    ports:
+      - "9001:9001"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  tawasalna-crisis:
+    build:
+      context: .
+      dockerfile: Dockerfile-crisis
+    ports:
+      - "8200:8200"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  tawasalna-facilities-management:
+    build:
+      context: .
+      dockerfile: Dockerfile-facilities-management
+    ports:
+      - "8016:8016"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  tawasalna-maintenance-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile-maintenance-agent
+    ports:
+      - "8097:8097"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  tawasalna-operations:
+    build:
+      context: .
+      dockerfile: Dockerfile-operations
+    ports:
+      - "8070:8070"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
+  tawasalna-security-safety:
+    build:
+      context: .
+      dockerfile: Dockerfile-security-safety
+    ports:
+      - "9004:9004"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://Ipactconsult:Ipact2021@cluster0.jt1kl.mongodb.net/TawasalnaDB
+
