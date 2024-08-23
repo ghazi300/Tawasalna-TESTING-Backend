@@ -330,7 +330,7 @@
 
             type: NodePort
 
-spring:
+  spring:
   mail:
     properties:
       mail:
