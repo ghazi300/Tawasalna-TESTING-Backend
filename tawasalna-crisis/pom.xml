@@ -43,6 +43,7 @@
             <groupId>com.ipactconsult</groupId>
             <artifactId>shared</artifactId>
             <version>0.0.2-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
 
 
