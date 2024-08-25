@@ -7,6 +7,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -24,4 +26,6 @@ public class PlanUrgence {
     private String ressourcesNecessaires;
     @LastModifiedDate
     private Date lastUpdated;
+    private List<String> images;
+
 }
