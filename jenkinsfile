@@ -19,10 +19,11 @@ pipeline {
                 script {
                     def scannerHome = tool 'scanner'
                     withSonarQubeEnv {
-                        sh "${scannerHome}/bin/sonar-scanner -X"
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.java.binaries=target/classes -X"
                     }
                 }
             }
         }
     }
 }
+
