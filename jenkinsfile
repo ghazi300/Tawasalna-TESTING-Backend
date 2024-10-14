@@ -7,6 +7,11 @@ pipeline {
                 git branch: 'develop', url: 'https://github.com/ghazi300/Tawasalna-TESTING-Backend.git'
             }
         }
+         stage('Nettoyage') {
+            steps {
+                sh 'mvn clean'
+            }
+        }
 
         stage('Compile & Install') {
             steps {
