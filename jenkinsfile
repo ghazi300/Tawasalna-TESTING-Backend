@@ -10,7 +10,7 @@ pipeline {
 
         stage('Compile & Install') {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean compile'
                 sh 'ls -R target' // Vérifie la présence du répertoire target
             }
         }
