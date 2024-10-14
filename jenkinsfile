@@ -1,34 +1,64 @@
 pipeline {
     agent any
-
+    environment {
+        SONAR_TOKEN = credentials('scanner') // Assurez-vous d'avoir stocké votre token SonarQube dans Jenkins
+    }
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'develop', url: 'https://github.com/ghazi300/Tawasalna-TESTING-Backend.git'
-            }
-        }
-         stage('Nettoyage') {
-            steps {
-                sh 'mvn clean'
-            }
-        }
-
-        stage('Compile & Install') {
-            steps {
-                sh 'mvn clean install'
-                sh 'ls -R target' // Vérifie la présence du répertoire target
-            }
-        }
-
-        stage('SonarQube Analysis') {
+        stage('Build All Modules') {
             steps {
                 script {
-                    def scannerHome = tool 'scanner'
-                    withSonarQubeEnv {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.java.binaries=target/classes -X"
+                    // Exécute la construction pour tous les modules
+                    sh 'mvn clean install -DskipTests' // Utilisez -DskipTests pour sauter les tests si vous souhaitez éviter d'attendre leur exécution
+                }
+            }
+        }
+        stage('Run Tests and Analyze Each Module') {
+            steps {
+                script {
+                    def modules = [
+                        'tawasalna-auth',
+                        'tawasalna-administration',
+                        'tawasalna-social',
+                        'tawasalna-business',
+                        'tawasalna-pms',
+                        'tawasalna-MaintenanceAgent',
+                        'tawasalna-crm',
+                        'Management-Coordination',
+                        'tawasalna-facilities-management',
+                        'tawasalna-crisis',
+                        'tawasalna-security-safety',
+                        'tawasalna-operations',
+                        'Resident-Support-Services'
+                    ]
+                    
+                    // Exécute les tests et l'analyse SonarQube pour chaque module
+                    for (module in modules) {
+                        echo "Analyzing module: ${module}"
+                        // Exécute les tests et génère les rapports
+                        sh "mvn test -f ${module}/pom.xml"
+                        // Exécute l'analyse SonarQube
+                        sh """
+                            mvn sonar:sonar \
+                                -Dsonar.projectKey=${module}-key \
+                                -Dsonar.host.url=http://localhost:9000 \
+                                -Dsonar.login=${SONAR_TOKEN} \
+                                -f ${module}/pom.xml
+                        """
                     }
                 }
             }
+        }
+    }
+    post {
+        always {
+            // Archive les artefacts de tous les modules
+            archiveArtifacts artifacts: '*/target/.jar', allowEmptyArchive: true
+        }
+        success {
+            echo 'Pipeline finished successfully!'
+        }
+        failure {
+            echo 'Pipeline failed.'
         }
     }
 }
