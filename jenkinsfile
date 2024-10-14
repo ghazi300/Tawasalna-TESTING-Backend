@@ -7,6 +7,15 @@ pipeline {
                 git branch: 'develop', url: 'https://github.com/ghazi300/Tawasalna-TESTING-Backend.git'
             }
         }
+
+
+        stage('Compile') {
+            steps {
+                sh './mvn clean compile'
+            }
+        }
+
+
         stage('SonarQube Analysis') {
             steps {
                 script {
