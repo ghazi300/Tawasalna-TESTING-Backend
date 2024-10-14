@@ -12,7 +12,7 @@ pipeline {
                 }
             }
         }
-        stage('Run Tests and Analyze Each Module') {
+        stage('Test and Analyze Modules') {
             steps {
                 script {
                     def modules = [
@@ -30,11 +30,11 @@ pipeline {
                         'tawasalna-operations',
                         'Resident-Support-Services'
                     ]
-                    
+
                     // Exécute les tests et l'analyse SonarQube pour chaque module
                     for (module in modules) {
-                        echo "Analyzing module: ${module}"
-                        // Exécute les tests et génère les rapports
+                        echo "Running tests and analyzing module: ${module}"
+                        // Exécute les tests
                         sh "mvn test -f ${module}/pom.xml"
                         // Exécute l'analyse SonarQube
                         sh """
